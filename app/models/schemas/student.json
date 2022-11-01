@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "student database model",
+  "description": "defines the data structure for a student",
+  "type": "object",
+  "required":[ "uga_my_id", "first_name", "last_name", "matriculation_term", "graduation_term" ],
+  "properties": {
+    "uga_my_id": {
+      "description": "the student's UGA myID",
+      "type": "string"
+    },
+    "first_name": {
+      "description": "the student's first name",
+      "type": "string"
+    },
+    "last_name": {
+      "description": "the student's last name",
+      "type": "string"
+    },
+    "majors": {
+      "description": "the student's majors",
+      "type": "array",
+      "properties": {
+        "name": {
+          "description": "the name of the major",
+          "type": "string"
+        },
+        "credit_hrs": {
+          "description": "the number of credit hours for the major",
+          "type": "integer"
+        }
+      }
+    },
+    "minors": {
+      "description": "the student's minors",
+      "type": "array",
+      "properties": {
+        "name": {
+          "description": "the name of the minor",
+          "type": "string"
+        },
+        "credit_hrs": {
+          "description": "the number of credit hours required for the minor",
+          "type": "integer"
+        }
+      }
+    },
+    "certificates": {
+      "description": "the student's certificates",
+      "type": "array",
+        "properties": {
+          "name": {
+            "description": "the name of the certificate",
+            "type": "string"
+          },
+          "credit_hrs": {
+            "description": "credit hours for the certificate",
+            "type": "integer"
+          }
+        }
+    },
+    "matriculation_term": {
+      "description": "the term the student matriculated",
+      "type": "string"
+    },
+    "graduation_term": {
+      "description": "the term the student is expected to graduate",
+      "type": "string"
+    }
+  }
+}
+
