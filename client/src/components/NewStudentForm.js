@@ -44,7 +44,11 @@ function NewStudentForm({ onAddStudent }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(studentData),
+      body: JSON.stringify(
+        {
+          data: studentData
+        }
+        ),
     })
       .then((r) => r.json())
       // below updates students in the state of App.js
