@@ -1,99 +1,134 @@
 import React from "react";
-import { Button, Card, Col, Form, FormControl, InputGroup, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Card, Col, Form, FormControl, InputGroup, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 function NewStudentForm({ onAddStudent }) {
-  const [student, setStudent] = useState({
+  const navigate = useNavigate();
+  const [rowCount, setRowCount] = useState(2);
+  const [studentData, setStudentData] = useState({
     first_name: "",
     last_name: "",
     uga_my_id: "",
-    majors: [
+    programs: [
       {
-        name: "",
-        credit_hours: 0
-      }
-    ],
-    minors: [
-      {
-        name: "",
-        credit_hours: ""
-      }
-    ],
-    certificates: [
-      {
-        name: "",
-        credit_hours: ""
+        program_name: "",
+        program_type: "",
+        program_code: "",
+        credit_hrs: 0
       }
     ],
     matriculation_term: "",
-    graduation_term: ""
+    graduation_term: "",
+    pre_professional: ""
   });
 
   function handleEditInfo(e) {
-    const updatedStudent = { ...student, [e.target.name]: e.target.value };
-    setStudent(updatedStudent);
+    const updatedStudentData = { ...studentData, [e.target.name]: e.target.value };
+    setStudentData(updatedStudentData);
   }
 
-  console.log(student);
+  function handleUpdatePrograms(e) {
+    const updatedPrograms = { ...programs, [e.target.name]: e.target.value };
+    setPrograms(updatedPrograms);
+    setStudentData(studentData => ({...studentData, programs: [updatedPrograms]}))
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/students`, {
+    console.log(studentData);
+    fetch("/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(student),
+      body: JSON.stringify(studentData),
     })
       .then((r) => r.json())
-      .then((plan) => onAddStudent(plan));
+      // below updates students in the state of App.js
+      .then((data) => onAddStudent(data));
+      
   }
+
+  function handleAddProgram(i, name, value) {
+    // check to see if plan contains recommendation
+    let rowId = i + 1;
+    let program = studentData.programs.find(
+      (program) => program.id === rowId
+    );
+    if (program) {
+      setStudentData({
+        ...studentData,
+        programs: studentData.programs.map((program) =>
+          program.id === rowId ? { ...program, [name]: value } : program
+        ),
+      })
+    } else {
+      setStudentData({
+        ...studentData,
+        programs: [
+          ...studentData.programs,
+          { id: rowId, [name]: value },
+        ]
+      })
+    }
+  }
+
+  function handleAddRow() {
+    let newRow = { program_code: "", program_name: "", program_type: "", credit_hrs: 0 };
+    newRow.id = rowCount.index + 1;
+    setRowCount(rowCount + 1);
+  }
+
+  function handleDeleteRow() {
+    setRowCount(rowCount - 1);
+  }  
  
-  const { firstName, lastName, major, matricTerm, gradTerm, currentTerm, advisingTerm, ugaMyId, preProfessional, earnedHrs, remainingHrs, requiredHrs } = student;
+  const { first_name, last_name, uga_my_id, matriculation_term, graduation_term,  pre_professional } = studentData;
+  const { program_name, program_type, program_code, credit_hrs } = studentData.programs;
 
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
         <Col>
-          <Card style={{ padding: "0" }}>
+          <Card className="rounded-0" style={{ padding: "0" }}>
             <CardHeader>
               <h2>Student Information</h2>
             </CardHeader>
             <Card.Body>
-            <Row>
-                <Col sm="3" style={{ paddingRight: "0" }}>
-                  <FormControl type="text" placeholder="first name" name="firstName" value={firstName} onChange={handleEditInfo}  />
-                </Col>
-                <Col sm="3" style={{ paddingLeft: "0", paddingRight: "0" }}>
-                  <FormControl type="text" placeholder="last name" name="lastName" value={lastName} onChange={handleEditInfo} />
-                </Col>
-                <Col sm="3" style={{ paddingRight: "0", paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="ugaMyId" name="ugaMyId" value={ugaMyId} onChange={handleEditInfo} />
-                </Col>
-                <Col sm="3" style={{ paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="major" name="major" value={major} onChange={handleEditInfo} />
-                </Col>
-              </Row>
-              <Row>
-                <Col sm="3" style={{ paddingRight: "0" }}>
-                  <FormControl type="text" placeholder="current term" name="currentTerm" value={currentTerm} onChange={handleEditInfo} />
-                </Col>
-                <Col sm="3" style={{ paddingRight: "0", paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="advising term" name="advisingTerm" value={advisingTerm} onChange={handleEditInfo} />
-                </Col>
-                <Col sm="3" style={{ paddingRight: "0", paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="matriculation term" name="matricTerm" value={matricTerm} onChange={handleEditInfo} />
-                </Col>
-                <Col sm="3" style={{ paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="graduation term" name="gradTerm" value={gradTerm} onChange={handleEditInfo} />
-                </Col>
-              </Row>
-              <Row>
-                <Col sm="3" style={{ paddingRight: "0" }}>
-                  <Form.Select aria-label="Default select example"  name="preProfessional" value={preProfessional} onChange={handleEditInfo}>
+              <InputGroup size="sm">
+                <InputGroup.Text className="rounded-0 py-0">
+                  First Name
+                </InputGroup.Text>
+                <FormControl className="rounded-0" type="text" placeholder="first name" name="first_name" value={first_name} onChange={handleEditInfo}/>
+                <InputGroup.Text className="rounded-0 py-0">
+                  Last Name
+                </InputGroup.Text>
+                <FormControl className="rounded-0" type="text" placeholder="last name" name="last_name" value={last_name} onChange={handleEditInfo}/>
+                <InputGroup.Text className="rounded-0 py-0">
+                UGA MyID
+              </InputGroup.Text>
+              <FormControl className="rounded-0" type="text" placeholder="UGA MyID" name="uga_my_id" value={uga_my_id} onChange={handleEditInfo}/>
+              <InputGroup.Text className="rounded-0 py-0">
+                Major
+              </InputGroup.Text>
+              <FormControl className="rounded-0" type="text" placeholder="major" name="program_code" value={program_code} onChange={handleUpdatePrograms}/>
+              </InputGroup>
+              <InputGroup size="sm">
+                <InputGroup.Text className="rounded-0 py-0">
+                  Matriculation Term
+                </InputGroup.Text>
+                <FormControl className="rounded-0" type="text" placeholder="matriculation term" name="matriculation_term" value={matriculation_term} onChange={handleEditInfo}/>
+                <InputGroup.Text className="rounded-0 py-0">
+                  Graduation Term
+                </InputGroup.Text>
+                <FormControl className="rounded-0" type="text" placeholder="graduation term" name="graduation_term" value={graduation_term} onChange={handleEditInfo}/>
+                <InputGroup.Text className="rounded-0 py-0">
+                  Pre-Professional
+                </InputGroup.Text>
+                <Form.Select size="sm" className="rounded-0 py-0" aria-label="Default select example"  name="pre_professional" value={pre_professional} onChange={handleEditInfo}>
                     <option>Select pre-professional track</option>
                     <option value="Pre-Med">Pre-Med</option>
                     <option value="Pre-Law">Pre-Law</option>
@@ -106,18 +141,47 @@ function NewStudentForm({ onAddStudent }) {
                     <option value="Pre-PA">Pre-Physician Assistant</option>
                     <option value="Pre-RN">Pre-Nursing</option>
                   </Form.Select>
-                </Col>
-                <Col sm="3" style={{ paddingRight: "0", paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="earned hours" name="earnedHrs" value={earnedHrs} onChange={handleEditInfo} />
-                </Col>
-                <Col sm="3" style={{ paddingRight: "0", paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="hours required" name="requiredHrs" value={requiredHrs} onChange={handleEditInfo} />
-                </Col>
-                <Col sm="3" style={{ paddingLeft: "0" }}>
-                  <FormControl type="text" placeholder="hours remaining" name="remainingHrs" value={remainingHrs} onChange={handleEditInfo} />
-                </Col>
-              </Row>
+              </InputGroup>
             </Card.Body>
+            <ListGroup>
+              <ListGroupItem>
+                <h4>Programs</h4>
+                <Button variant="outline-primary" size="sm" onClick={handleAddRow}>Add Row</Button>
+              </ListGroupItem>
+            {[...Array(rowCount)].map((r, i) => (
+              <Row >
+                    <InputGroup key={i} size="sm" className="rounded-0 py-0">
+                      <InputGroup.Text className="rounded-0 py-0">
+                        Program Code
+                      </InputGroup.Text>
+                      <FormControl className="rounded-0 py-0" type="text" placeholder="Program Code" name="program_code" value={program_code} onChange={(e) => handleAddProgram(i, "program_code", e.target.value)} />
+                      <InputGroup.Text className="rounded-0 py-0">
+                        Program Name
+                      </InputGroup.Text>
+                      <FormControl
+                        className="rounded-0 py-0"
+                        type="text"
+                        placeholder="Program Name"
+                        name="program_name"
+                        value={program_name}
+                        onChange={(e) =>
+                          handleAddProgram(i, "program_name", e.target.value)
+                        }
+                      />
+                      <InputGroup.Text className="rounded-0 py-0">
+                        Program Type
+                      </InputGroup.Text>
+                      <FormControl className="rounded-0 py-0" type="text" placeholder="Program Type" name="program_type" value={program_type} onChange={(e) => handleAddProgram(i, "program_type", e.target.value)} />
+                      <InputGroup.Text className="rounded-0 py-0">
+                        Credit Hrs
+                      </InputGroup.Text>
+                      <FormControl className="rounded-0 py-0" type="text" placeholder="Credit Hrs" name="credit_hrs" value={credit_hrs} onChange={(e) => handleAddProgram(i, "credit_hrs", e.target.value)} />
+                      <Button className="rounded-0" size="sm" variant="outline-danger" onClick={handleDeleteRow}>Delete Row</Button>
+                    </InputGroup>
+                    
+              </Row>
+              ))}
+            </ListGroup>
             <Card.Footer>
               <Button type="submit" variant="primary">Save</Button>
             </Card.Footer>

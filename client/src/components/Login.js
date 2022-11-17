@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 function Login({ onLogin }) {
-    const [ugaMyId, setUgaMyId] = useState("");
-    const [password, setPassword] = useState("");
+    const [uga_my_id, setUgaMyId] = useState("");
+    const [password, setPasswordDigest] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -13,7 +13,7 @@ function Login({ onLogin }) {
             headers: {
                 "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ugaMyId, password }),
+                body: JSON.stringify({ uga_my_id, password }),
             })
             .then((r) => r.json())
             .then((user) => {
@@ -29,7 +29,7 @@ function Login({ onLogin }) {
                 <Form.Control
                     type="text"
                     placeholder="Enter UGA MyID"
-                    value={ugaMyId}
+                    value={uga_my_id}
                     onChange={(e) => setUgaMyId(e.target.value)}
                 />
                 <Form.Label>Password</Form.Label>
@@ -37,7 +37,7 @@ function Login({ onLogin }) {
                     type="password"
                     placeholder="Enter Password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setPasswordDigest(e.target.value)}
                 />
             </Form.Group>
             

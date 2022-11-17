@@ -44,7 +44,6 @@ function AcademicPlanForm({ onUpdatePlan }) {
 
   // console.log(payload.data);
   // console.log(payload.student);
-  console.log(student)
 
   const [rowCount, setRowCount] = useState(`${plan.recommendations.length}`);
 
@@ -57,10 +56,11 @@ function AcademicPlanForm({ onUpdatePlan }) {
         return recommendation;
       }
     );
+    console.log(updatedRecommendations);
     setPlan((plan) => ({
       ...plan,
       recommendations: updatedRecommendations,
-    }));
+    }))
   }
 
   const handleAddRow = () => {
@@ -178,9 +178,9 @@ function AcademicPlanForm({ onUpdatePlan }) {
                         className="rounded-0"
                         type="text"
                         placeholder="alt course"
-                        name="altCourse"
+                        name="alt_course"
                         value={recommendation.alt_course}
-                        onChange={(e) => handleRecommendationChange(i, "altCourse", e.target.value)}
+                        onChange={(e) => handleRecommendationChange(i, "alt_course", e.target.value)}
                       />
                     </Col>
                     <Col sm="1" style={{ paddingLeft: "0" }}>

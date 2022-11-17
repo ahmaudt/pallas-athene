@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Col, Container, NavDropdown, Row } from "react-bootstrap";
-import { NavLink, Routes, Route, useNavigate } from "react-router-dom";
+import { Col, Container, NavDropdown, Row, Navbar } from "react-bootstrap";
+import {
+  NavLink,
+  Routes,
+  Route,
+  useNavigate,
+  useMatch,
+  useParams
+} from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -15,49 +22,54 @@ import ViewPlan from "./components/ViewPlan";
 import Login from "./components/Login";
 import PrintPlan from "./components/PrintPlan";
 
-
 function App() {
   const navigate = useNavigate();
   // students is the state variable for the student list
+  const params = useParams();
+  const [page, setPage] = useState("/");
+  const [showNav, setShowNav] = useState(null);
   const [students, setStudents] = useState([]);
-  const [user, setUser] = useState("");
-  const [selectedStudent, setSelectedStudent] = useState({
-    id: "",
-    ugaMyId: "",
-    firstName: "",
-    lastName: "",
-    matricTerm: "",
-    gradTerm: "",
-    currentTerm: "",
-    advisingTerm: "",
-    major: "",
-    preProfessional: "",
-    earnedHrs: 0,
-    requiredHrs: 0,
-    remainingHrs: 0,
+  const [user, setUser] = useState({
+    password: "",
+    uga_my_id: ""
   });
+  // const [selectedStudent, setSelectedStudent] = useState({
+  //   id: "",
+  //   ugaMyId: "",
+  //   firstName: "",
+  //   lastName: "",
+  //   matricTerm: "",
+  //   gradTerm: "",
+  //   currentTerm: "",
+  //   advisingTerm: "",
+  //   major: "",
+  //   preProfessional: "",
+  //   earnedHrs: 0,
+  //   requiredHrs: 0,
+  //   remainingHrs: 0,
+  // });
   const [plans, setPlans] = useState([]);
-  const [workingPlan, setWorkingPlan] = useState({
-        studentId: "",
-        adviseTerm: "",
-        adviseYear: "",
-        recommendations: []
+  // const [workingPlan, setWorkingPlan] = useState({
+  //   studentId: "",
+  //   adviseTerm: "",
+  //   adviseYear: "",
+  //   recommendations: [],
+  // });
+
+  // function handleChangeForm(recommendations) {
+  //   setWorkingPlan((workingPlan) => ({
+  //     ...workingPlan,
+  //     recommendations: recommendations,
+  //   }));
+  // }
+
+  useEffect(() => {
+    fetch("/user").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
     });
-
-    function handleChangeForm(recommendations) {
-      setWorkingPlan((workingPlan) => ({
-        ...workingPlan,
-        recommendations: recommendations,
-      }));
-    }
-
-    useEffect(() => {
-      fetch("/user").then((r) => {
-        if (r.ok) {
-          r.json().then((user) => setUser(user));
-        }
-      });
-    }, []);
+  }, []);
 
   useEffect(() => {
     fetch("/students")
@@ -65,7 +77,7 @@ function App() {
       .then((data) => setStudents(data));
   }, []);
 
-  console.log(students[3]);
+  console.log(students);
 
   useEffect(() => {
     fetch("/plans")
@@ -100,15 +112,15 @@ function App() {
     setPlans(updatedPlans);
   }
 
+  console.log(students)
+
   // this is a comment to test font style
 
   function handleLogout() {
-    fetch("/logout", 
-      { method: "DELETE" })
-      .then(() => {
-        setUser("");
-        navigate("/");
-      });
+    fetch("/logout", { method: "DELETE" }).then(() => {
+      setUser("");
+      navigate("/");
+    });
   }
 
   function handleLogin(user) {
@@ -116,47 +128,122 @@ function App() {
     navigate("/home");
   }
 
+  const match = useMatch(page, {
+    path: "/plans/:id/view",
+    exact: true,
+    strict: false,
+  });
+
+  function handleChangePage(page) {
+    setPage((page) => page);
+    page === "/plans/:id/view" ? setShowNav(false) : setShowNav(true);
+  }
+
+  function navbar() {
+    return (
+      <Navbar bg="light" expand="lg" className="py-0 mx-0 px-0">
+        <Nav variant="tabs" defaultActiveKey="/">
+        <Nav.Item>
+          <Nav.Link className="rounded-0" as={NavLink} to="/">
+            Home
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            className="rounded-0"
+            as={NavLink}
+            onClick={handleLogout}
+          >
+            Logout
+          </Nav.Link>
+        </Nav.Item>
+        <NavDropdown className="rounded-0" title="Advising">
+          <NavDropdown.Item
+            className="rounded-0"
+            as={NavLink}
+            to="/students"
+          >
+            Students
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            className="rounded-0"
+            as={NavLink}
+            to="/new-student"
+          >
+            New Student
+          </NavDropdown.Item>
+        </NavDropdown>
+        </Nav>
+      </Navbar>  
+    )
+  }
+
+  // hide navbar if page is PrintPlan component
+  // match any number between 0 and 1000
+
   if (user) {
-      return (
+    return (
       <div className="App">
-        <Container fluid>
-          <Row>
-            <Col sm="auto"></Col>
-            <Col>
-              <Nav variant="tabs" defaultActiveKey="/">
-                <Nav.Item>
-                  <Nav.Link className="rounded-0" as={NavLink} to="/">
-                    Home
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className="rounded-0" as={NavLink} onClick={handleLogout}>
-                    Logout
-                  </Nav.Link>
-                </Nav.Item>
-                <NavDropdown className="rounded-0" title="Advising">
-                  <NavDropdown.Item className="rounded-0" as={NavLink} to="/students">Students</NavDropdown.Item>
-                  <NavDropdown.Item className="rounded-0" as={NavLink} to="/new-student">New Student</NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
+
+        <div className="row">
+          <Col>
+          {showNav ? null : navbar()}
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route exact path="/students" element={<StudentList students={students} onSelectStudent={handleSelectStudent} onSelectPlan={setWorkingPlan} />} />
-                <Route exact path="/students/:id" element={<StudentDetail plans={plans} onEditStudent={handleEditStudent} onDeletePlan={handleDeletePlan} />} />
-                <Route path="/plans/:id/edit" element={<AcademicPlanForm onUpdatePlan={handleChangeForm} student={selectedStudent} />} />
-                <Route path="/plans/:id/view" element={<PrintPlan />} />
-                <Route path="/new-student" element={<NewStudentForm onAddStudent={handleAddStudent} />} />
-                <Route path="/students/:id/new_plan" element={<NewAcademicPlanForm onAddPlan={handleAddPlan} />} />
-                <Route path="/generated-plan" element={<PrintPlan student={selectedStudent} />} />
-                <Route path="/login" element={<Login onLogin={handleLogin} />} />
+                <Route
+                  exact
+                  path="/students"
+                  element={
+                    <StudentList
+                      students={students}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/students/:id"
+                  element={
+                    <StudentDetail
+                      plans={plans}
+                      onEditStudent={handleEditStudent}
+                      onDeletePlan={handleDeletePlan}
+                    />
+                  }
+                />
+                <Route
+                  path="/plans/:id/edit"
+                  element={
+                    <AcademicPlanForm
+                    />
+                  }
+                />
+                <Route
+                  path="/plans/:id/view"
+                  element={<PrintPlan onPageChange={handleChangePage} />}
+                />
+                <Route
+                  path="/new-student"
+                  element={<NewStudentForm onAddStudent={handleAddStudent} />}
+                />
+                <Route
+                  path="/students/:id/new_plan"
+                  element={<NewAcademicPlanForm onAddPlan={handleAddPlan} />}
+                />
+                <Route
+                  path="/generated-plan"
+                  element={<PrintPlan />}
+                />
+                <Route
+                  path="/login"
+                  element={<Login onLogin={handleLogin} />}
+                />
               </Routes>
-            </Col>
-            <Col sm="auto"></Col>
-          </Row>
-        </Container>
+          </Col>
+        </div>
       </div>
-    )} else {
-      return <Login onLogin={handleLogin} />
+    );
+  } else {
+    return <Login onLogin={handleLogin} />;
   }
 }
 

@@ -11,7 +11,7 @@ function StudentList({ students, onSelectStudent }) {
         key={s.id}
         firstName={s.data.first_name}
         lastName={s.data.last_name}
-        major={s.data.majors[0].name}
+        major={s.data.programs[0].program_name}
         id={s.data.uga_my_id}
         student={s}
         studentId={s.id}
@@ -23,9 +23,9 @@ function StudentList({ students, onSelectStudent }) {
       <Row>
         <Col>
           <Card style={{ padding: "0" }}>
-            <CardHeader>
+            <Card.Header>
               <h2>Students</h2>
-            </CardHeader>
+            </Card.Header>
             <Card.Body>
               <Table striped borderless size="sm">
                 <thead>

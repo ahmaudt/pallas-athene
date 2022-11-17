@@ -10,26 +10,10 @@ function StudentInfoForm({ onEditStudent }) {
       first_name: "",
       last_name: "",
       uga_my_id: "",
-      majors: [
-        {
-          name: "",
-          credit_hours: 0
-        }
-      ],
-      minors: [
-        {
-          name: "",
-          credit_hours: ""
-        }
-      ],
-      certificates: [
-        {
-          name: "",
-          credit_hours: ""
-        }
-      ],
+      programs: [],
       matriculation_term: "",
-      graduation_term: ""
+      graduation_term: "",
+      pre_professional: ""
   });
 
   useEffect(() => {
@@ -69,44 +53,31 @@ function StudentInfoForm({ onEditStudent }) {
               </CardHeader>
               <Card.Body>
               <Row>
-                <InputGroup className="input-group-sm">
-                  <InputGroup.Text className="rounded-0 text-center justify-content-center" size="sm">First</InputGroup.Text>
-                  <Col style={{ paddingRight: "0" }}>
-                    <FormControl className="rounded-0 " size="sm" type="text" placeholder="first name" name="first_name" value={first_name} onChange={handleEditInfo}  />
-                  </Col>
-                  <InputGroup.Text className="rounded-0 text-center justify-content-center" size="sm">Last</InputGroup.Text>
-                  <Col style={{ paddingLeft: "0", paddingRight: "0" }}>
-                    <FormControl className="rounded-0 " size="sm" type="text" placeholder="last name" name="last_name" value={last_name} onChange={handleEditInfo} />
-                  </Col>
-                  <InputGroup.Text className="rounded-0 text-center justify-content-center" size="sm">MyID</InputGroup.Text>
-                  <Col style={{ paddingRight: "0", paddingLeft: "0" }}>
-                    <FormControl className="rounded-0 " size="sm" type="text" placeholder="UGA MyID" name="uga_my_id" value={uga_my_id} onChange={handleEditInfo} />
-                  </Col>
-                  <Col>
-                    <FormControl className="rounded-0 text-end" size="sm" type="text" placeholder="major" name="major" value={majors[0].name} onChange={handleEditInfo} />
-                  </Col>
-                  <InputGroup.Text className="rounded-0" size="sm">Major</InputGroup.Text>
-                  </InputGroup>
-                </Row>
-                <Row>
-                  <InputGroup className="input-group-sm">
-                    <InputGroup.Text className="rounded-0 text-center justify-content-center" size="sm">Minors</InputGroup.Text>
-                  <Col>
-                    <FormControl className="rounded-0" size="sm" type="text" placeholder="Minor" name="minor" value={minors[0].name} onChange={handleEditInfo} />
-                  </Col>
-                  <InputGroup.Text className="rounded-0 text-center justify-content-center" size="sm">Certificates</InputGroup.Text>
-                  <Col>
-                    <FormControl className="rounded-0 " size="sm" type="text" placeholder="advising term" name="certificate" value={certificates[0].name} onChange={handleEditInfo} />
-                  </Col>
-                  <InputGroup.Text className="rounded-0 text-center justify-content-center" size="sm">Matric</InputGroup.Text>
-                  <Col>
-                    <FormControl className="rounded-0 " size="sm" type="text" placeholder="matriculation term" name="matriculation_term" value={matriculation_term} onChange={handleEditInfo} />
-                  </Col>
-                  <Col>
-                    <FormControl className="rounded-0 text-end " size="sm" type="text" placeholder="graduation term" name="graduation_term" value={graduation_term} onChange={handleEditInfo} />
-                  </Col>
-                  <InputGroup.Text  className="rounded-0 text-center justify-content-center" size="sm">Grad</InputGroup.Text>
-                  </InputGroup>
+                <InputGroup size="sm" className="rounded-0">
+                  <InputGroup.Text className="rounded-0 py-0">
+                    First Name
+                  </InputGroup.Text>
+                  <Form.Control id="inputGroup-sizing-sm" className="rounded-0" type="text" placeholder="first name" name="first_name" value={first_name} onChange={handleEditInfo}  />
+                  <InputGroup.Text className="rounded-0 py-0">
+                    Last Name
+                  </InputGroup.Text>
+                  <Form.Control className="rounded-0" type="text" placeholder="last name" name="last_name" value={last_name} onChange={handleEditInfo} />
+                </InputGroup>
+                <InputGroup size="sm" className="rounded-0">
+                  <InputGroup.Text className="rounded-0 py-0">
+                    MyID
+                  </InputGroup.Text>
+                  <Form.Control className="rounded-0" type="text" placeholder="UGA MyID" name="uga_my_id" value={uga_my_id} onChange={handleEditInfo} />
+                  <InputGroup.Text className="rounded-0 py-0" size="sm">
+                    Matric
+                  </InputGroup.Text>
+                  <FormControl className="rounded-0" type="text" placeholder="matriculation term" name="matriculation_term" value={matriculation_term} onChange={handleEditInfo} />
+                  <InputGroup.Text  className="rounded-0 py-0">
+                    Grad
+                  </InputGroup.Text>
+                  <FormControl className="rounded-0 text-end" type="text" placeholder="graduation term" name="graduation_term" value={graduation_term} onChange={handleEditInfo} />
+                </InputGroup>
+                
                 </Row>
               </Card.Body>
               <Card.Footer>

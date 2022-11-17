@@ -31,14 +31,6 @@ function ViewPlan() {
         setStudent(plan.student)});
   }, [params.id]);
 
-  console.log(plan);
-
-  // useEffect(() => {
-  //   fetch(`/students/${plan.student.id}`)
-  //     .then((r) => r.json())
-  //     .then((data) => setStudent(data));
-  // }, [plan.student.id]);
-
   if (!plan || !student) {
     <h1>Loading...</h1>;
   }
