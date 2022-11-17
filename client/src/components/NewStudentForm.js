@@ -32,7 +32,8 @@ function NewStudentForm({ onAddStudent }) {
 
   function handleUpdatePrograms(e) {
     const updatedPrograms = { ...programs, [e.target.name]: e.target.value };
-    setPrograms(updatedPrograms);
+    const filteredPrograms = updatedPrograms.filter((program) => program.program_name !== "")
+    setPrograms(filteredPrograms);
     setStudentData(studentData => ({...studentData, programs: [updatedPrograms]}))
   }
 
@@ -48,7 +49,7 @@ function NewStudentForm({ onAddStudent }) {
         {
           data: studentData
         }
-        ),
+      ),
     })
       .then((r) => r.json())
       // below updates students in the state of App.js

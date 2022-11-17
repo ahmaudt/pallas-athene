@@ -9,7 +9,7 @@ function StudentListItem({ studentId, firstName, lastName, major }) {
             <tr>
                 <td>{lastName}</td>
                 <td>{firstName}</td>
-                <td>{major}</td>
+                <td>{ major }</td>
                 <td>{studentId}</td>
                 <td>
                     <Link to={`/students/${studentId}`}>

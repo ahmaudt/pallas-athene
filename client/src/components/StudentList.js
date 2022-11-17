@@ -11,12 +11,19 @@ function StudentList({ students, onSelectStudent }) {
         key={s.id}
         firstName={s.data.first_name}
         lastName={s.data.last_name}
-        major={s.data.programs[0].program_name}
+        major={
+          s.data.programs.map((program) => {
+            if (program.program_type === "major") {
+              return program.program_code
+            }
+          })
+        }
         id={s.data.uga_my_id}
         student={s}
         studentId={s.id}
       />
     ));
+
 
   return (
     <React.Fragment>
