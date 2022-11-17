@@ -18,6 +18,13 @@ function StudentList({ students, onSelectStudent }) {
             }
           })
         }
+        minor={
+          s.data.programs.map((program) => {
+            if (program.program_type === "minor") {
+              return program.program_code
+            }
+          })
+        }
         id={s.data.uga_my_id}
         student={s}
         studentId={s.id}
@@ -40,6 +47,7 @@ function StudentList({ students, onSelectStudent }) {
                     <th>Last Name</th>
                     <th>First Name</th>
                     <th>Major</th>
+                    <th>Minor</th>
                     <th>Student ID</th>
                     <th>View</th>
                   </tr>

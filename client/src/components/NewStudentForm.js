@@ -27,14 +27,15 @@ function NewStudentForm({ onAddStudent }) {
 
   function handleEditInfo(e) {
     const updatedStudentData = { ...studentData, [e.target.name]: e.target.value };
-    setStudentData(updatedStudentData);
+    const filteredStudentData = updatedStudentData.programs.filter((program) => program.program_name !== "");
+    const updatedStudentDataWithFilteredPrograms = { ...updatedStudentData, programs: filteredStudentData };
+    setStudentData(updatedStudentDataWithFilteredPrograms);
   }
 
   function handleUpdatePrograms(e) {
     const updatedPrograms = { ...programs, [e.target.name]: e.target.value };
-    const filteredPrograms = updatedPrograms.filter((program) => program.program_name !== "")
-    setPrograms(filteredPrograms);
-    setStudentData(studentData => ({...studentData, programs: [updatedPrograms]}))
+    const filteredPrograms = updatedPrograms.filter((program) => program.program_name === "")
+    setStudentData(studentData => ({...studentData, programs: [filteredPrograms]}))
   }
 
   function handleSubmit(e) {
@@ -155,7 +156,6 @@ function NewStudentForm({ onAddStudent }) {
                 </CardHeader>
                 <Card.Body>
                   {[...Array(rowCount)].map((r, i) => (
-                  <Row >
                     <InputGroup key={i} size="sm" className="rounded-0 py-0">
                       <InputGroup.Text className="rounded-0 py-0">
                         Code
@@ -182,7 +182,6 @@ function NewStudentForm({ onAddStudent }) {
                       <FormControl className="rounded-0 py-0" type="text" placeholder="Credit Hrs" name="credit_hrs" value={credit_hrs} onChange={(e) => handleAddProgram(i, "credit_hrs", e.target.value)} />
                       <Button className="rounded-0" size="sm" variant="outline-danger" onClick={handleDeleteRow}>Delete Row</Button>
                     </InputGroup>
-                  </Row>
                   ))}
                 </Card.Body>
                 <Card.Footer>
