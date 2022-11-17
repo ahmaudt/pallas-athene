@@ -114,10 +114,6 @@ function NewStudentForm({ onAddStudent }) {
                   UGA MyID
                 </InputGroup.Text>
                 <FormControl className="rounded-0" type="text" placeholder="UGA MyID" name="uga_my_id" value={uga_my_id} onChange={handleEditInfo}/>
-                <InputGroup.Text className="rounded-0 py-0">
-                  Major
-                </InputGroup.Text>
-                <FormControl className="rounded-0" type="text" placeholder="major" name="program_code" value={program_code} onChange={handleUpdatePrograms}/>
                 </InputGroup>
                 <InputGroup size="sm">
                   <InputGroup.Text className="rounded-0 py-0">
