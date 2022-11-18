@@ -17,48 +17,6 @@
       "description": "the student's last name",
       "type": "string"
     },
-    "majors": {
-      "description": "the student's majors",
-      "type": "array",
-      "properties": {
-        "name": {
-          "description": "the name of the major",
-          "type": "string"
-        },
-        "credit_hrs": {
-          "description": "the number of credit hours for the major",
-          "type": "integer"
-        }
-      }
-    },
-    "minors": {
-      "description": "the student's minors",
-      "type": "array",
-      "properties": {
-        "name": {
-          "description": "the name of the minor",
-          "type": "string"
-        },
-        "credit_hrs": {
-          "description": "the number of credit hours required for the minor",
-          "type": "integer"
-        }
-      }
-    },
-    "certificates": {
-      "description": "the student's certificates",
-      "type": "array",
-        "properties": {
-          "name": {
-            "description": "the name of the certificate",
-            "type": "string"
-          },
-          "credit_hrs": {
-            "description": "credit hours for the certificate",
-            "type": "integer"
-          }
-        }
-    },
     "matriculation_term": {
       "description": "the term the student matriculated",
       "type": "string"
@@ -66,6 +24,40 @@
     "graduation_term": {
       "description": "the term the student is expected to graduate",
       "type": "string"
+    },
+    "pre_professional": {
+      "description": "the student's pre-professional track",
+      "type": "string"
+    },
+    "programs": {
+      "description": "list of the student's majors, minors, and/or certificate programs",
+      "type": "array",
+      "properties": {
+        "program_name": {
+          "description": "name of the program",
+          "type": "string"
+        },
+        "program_code": {
+          "description": "the 4-letter code of the program",
+          "type": "string"
+        },
+        "credit_hrs": {
+          "description": "number of credit hours required to complete program",
+          "type": "integer"
+        },
+        "program_type": {
+          "description": "type of program (i.e. minor)",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [ "major", "minor", "certificate" ]
+          }
+        },
+        "primary_program": {
+          "description": "indicates whether this is the student's primary program",
+          "type": "boolean"
+        }
+      }
     }
   }
 }

@@ -13,8 +13,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
 
   const navigate = useNavigate();
 
-  const [plan, setPlan] = useState({
-    student_id: "",
+  const [planData, setPlanData] = useState({
     advising_term: "",
     current_term: "",
     recommendations: [
@@ -23,7 +22,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
         requirement: "",
         alt_course: "",
       },
-    ],
+    ]
   });
 
   const [student, setStudent] = useState(null);
@@ -31,21 +30,26 @@ function NewAcademicPlanForm({ onAddPlan }) {
   useEffect(() => {
     fetch(`/students/${params.id}`)
       .then((r) => r.json())
-      .then((student) => {
-        setStudent(student.data);
+      .then((payload) => {
+        setStudent(payload);
       });
   }, [params.id]);
 
-  console.log(params);
+  const advisee_id = student?.id;
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/plans`, {
+    const filteredPlanData = planData.recommendations.filter((recommendation) => recommendation.course !== "");
+    const updatedPlanData = { ...planData, recommendations: filteredPlanData };
+    fetch("/plans", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(plan),
+      body: JSON.stringify({
+        student_id: advisee_id,
+        data: updatedPlanData,
+      }),
     })
       .then((r) => r.json())
       .then((data) => {
@@ -57,14 +61,14 @@ function NewAcademicPlanForm({ onAddPlan }) {
   function handleAddRecommendation(i, name, value) {
     // check to see if plan contains recommendation
     let rowId = i + 1;
-    let recommendation = plan.recommendations.find(
+    let recommendation = planData.recommendations.find(
       (recommendation) => recommendation.id === rowId
     );
     if (recommendation) {
       // if recommendation exists, update it
-      setPlan({
-        ...plan,
-        recommendations: plan.recommendations.map((recommendation) =>
+      setPlanData({
+        ...planData,
+        recommendations: planData.recommendations.map((recommendation) =>
           recommendation.id === rowId
             ? { ...recommendation, [name]: value }
             : recommendation
@@ -72,10 +76,10 @@ function NewAcademicPlanForm({ onAddPlan }) {
       });
     } else {
       // if recommendation does not exist, create it
-      setPlan({
-        ...plan,
+      setPlanData({
+        ...planData,
         recommendations: [
-          ...plan.recommendations,
+          ...planData.recommendations,
           { id: rowId, [name]: value },
         ],
       });
@@ -83,7 +87,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
   }
 
   function handleAddRow() {
-    let newRow = { requirement: "", course: "", altCourse: "" };
+    let newRow = { requirement: "", course: "", alt_course: "", notes: "" };
     newRow.id = rowCount.index + 1;
     setRowCount(rowCount + 1);
   }
@@ -92,10 +96,10 @@ function NewAcademicPlanForm({ onAddPlan }) {
     setRowCount(rowCount - 1);
   }
 
-  const { requirement, course, altCourse } = plan.recommendations;
+  const { requirement, course, alt_course, notes } = planData.recommendations;
 
   return (
-    <div>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <Col>
           <StudentInfoForm currentStudent={student} />
@@ -151,12 +155,12 @@ function NewAcademicPlanForm({ onAddPlan }) {
                         className="rounded-0"
                         type="text"
                         placeholder="alt course"
-                        name="altCourse"
-                        value={altCourse}
+                        name="alt_course"
+                        value={alt_course}
                         onChange={(e) =>
                           handleAddRecommendation(
                             i,
-                            "altCourse",
+                            "alt_course",
                             e.target.value
                           )
                         }
@@ -179,8 +183,8 @@ function NewAcademicPlanForm({ onAddPlan }) {
                   as="textarea"
                   placeholder="plan notes"
                   name="notes"
-                  defaultValue={plan.notes}
-                  onChange={(e) => (plan.notes = e.target.value)}
+                  defaultValue={planData.notes}
+                  onChange={(e) => (planData.notes = e.target.value)}
                   rows={5}
                 ></Form.Control>
               </FormGroup>
@@ -189,7 +193,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
               <Button className="rounded-0" variant="success" type="submit">
                 Save
               </Button>
-              <Link to={`/plans/${plan.id}/view`}>
+              <Link to={`/plans/${planData.id}/view`}>
                 <Button
                   className="rounded-0"
                   style={{ marginLeft: "5px" }}
@@ -203,7 +207,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
           </Card>
         </Col>
       </Row>
-    </div>
+    </Form>
   );
 }
 

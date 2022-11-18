@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:uga_my_id, :first_name, :lastName, :password, :password_digest, :password_confirmation)
+        params.permit(:uga_my_id, :first_name, :last_name, :password, :password_digest, :password_confirmation)
     end
 
 end

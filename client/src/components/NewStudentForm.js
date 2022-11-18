@@ -32,15 +32,8 @@ function NewStudentForm({ onAddStudent }) {
     setStudentData(updatedStudentDataWithFilteredPrograms);
   }
 
-  function handleUpdatePrograms(e) {
-    const updatedPrograms = { ...programs, [e.target.name]: e.target.value };
-    const filteredPrograms = updatedPrograms.filter((program) => program.program_name === "")
-    setStudentData(studentData => ({...studentData, programs: [filteredPrograms]}))
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(studentData);
     fetch("/students", {
       method: "POST",
       headers: {

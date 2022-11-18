@@ -21,7 +21,7 @@ class User < ApplicationRecord
     end
 
     def password=(new_password)
-        salt = Bcrypt::Engine.generate_salt
+        salt = BCrypt::Engine.generate_salt
         self.password_digest = BCrypt::Engine.hash_secret(new_password, salt)
     end
 

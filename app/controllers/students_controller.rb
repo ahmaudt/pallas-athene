@@ -10,6 +10,13 @@ class StudentsController < ApplicationController
         render json: student
     end
 
+    def create
+        student = Student.create(student_params)
+        student.user_id = @current_user.id
+        student.save
+        render json: student, status: :created
+    end
+
     def update
         student = Student.find_by(id: params[:id])
         student.update(student_params)
@@ -25,26 +32,19 @@ class StudentsController < ApplicationController
     private
 
     def student_params
-        params.permit(
-            data: [
-                :uga_my_id,
-                :first_name,
-                :last_name,
-                :matriculation_term,
-                :graduation_term,
-                :majors [
-                    :name,
-                    :credit_hrs
-                ],
-                :minors [
-                    :name,
-                    :credit_hrs
-                ],
-                :certificates [
-                    :name,
-                    :credit_hrs
-                ],
+        params.require(:student).permit(:user_id, :student, data: [
+            :uga_my_id,
+            :first_name,
+            :last_name,
+            :matriculation_term,
+            :graduation_term,
+            :pre_professional,
+            programs: [
+                :program_code,
+                :program_name,
+                :program_type,
+                :credit_hrs
             ]
-        )
+        ])
     end
 end

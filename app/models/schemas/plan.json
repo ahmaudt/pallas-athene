@@ -1,8 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "defines the data structure for an academic plan",
+  "description": "defines the data structure for an academic plan",
   "type": "object",
-  "required": ["advising_term", "current_term", "recommendations"],
+  "required": ["recommendations"],
   "properties": {
     "advising_term": {
       "description": "the term the plan was created for",
@@ -17,11 +18,11 @@
       "type": "array",
       "properties": {
         "course": {
-          "description": "the course the recommendation is for",
+          "description": "the recommended course",
           "type": "string"
         },
         "requirement": {
-          "description": "the requirement the recommendation is for",
+          "description": "the requirement the course satisfies",
           "type": "string"
         },
         "alt_course": {

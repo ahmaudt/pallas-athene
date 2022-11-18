@@ -10,7 +10,8 @@ class PlansController < ApplicationController
     end
 
     def create
-        plan = Plan.create!(plan_params)
+        plan = Plan.create(plan_params)
+        plan.save
         render json: plan, status: :created
     end
 
@@ -23,16 +24,16 @@ class PlansController < ApplicationController
     def destroy
         plan = Plan.find_by(id: params[:id])
         plan.destroy
-        head :no_content
     end
 
     private
 
     def plan_params
-        params.permit(:student_id, data: [
+        params.require(:plan).permit(:student_id, :plan, :id, data: [
             :current_term,
             :advising_term,
-            :recommendations [
+            recommendations: [
+                :id,
                 :requirement,
                 :course,
                 :alt_course

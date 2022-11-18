@@ -104,7 +104,8 @@ function App() {
   }
 
   function handleAddPlan(plan) {
-    setPlans((plans) => [...plans, plan]);
+    const updatedPlans = [...plans, plan];
+    setPlans(updatedPlans);
   }
 
   function handleDeletePlan(id) {
