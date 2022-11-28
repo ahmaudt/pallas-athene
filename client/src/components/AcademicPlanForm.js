@@ -4,7 +4,6 @@ import {
   Row,
   Col,
   Card,
-  CardGroup,
   Form,
   FormGroup
 } from "react-bootstrap";
@@ -13,6 +12,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import StudentInfoForm from "./StudentInfoForm";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid, regular, brands, light, thin, duotone, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function AcademicPlanForm({ onUpdatePlan }) {
   const params = useParams();
