@@ -127,7 +127,10 @@ function AcademicPlanForm({ onUpdatePlan }) {
           />
         </Col>
         <Col sm="1" style={{ paddingLeft: "0" }}>
-          <Button variant="outline-danger" onClick={(e) => handleDeleteRow(i)}>Delete Row</Button>
+        <FontAwesomeIcon icon={icon({name: 'trash', style: 'solid'})} />
+          {/* <button variant="outline-danger" onClick={(e) => handleDeleteRow(i)}>
+            
+          </button> */}
         </Col>
       </Row>
       ))
