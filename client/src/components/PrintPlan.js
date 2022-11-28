@@ -25,7 +25,7 @@ function PrintPlan({ onPageChange }) {
   });
 
   const [student, setStudent] = useState({
-    first_name: "",
+  data: { first_name: "",
     last_name: "",
     uga_my_id: "",
     programs: [
@@ -38,14 +38,14 @@ function PrintPlan({ onPageChange }) {
     pre_professional: "",
     matriculation_term: "",
     graduation_term: ""
-  });
+  }});
 
   useEffect(() => {
     fetch(`/plans/${params.id}`)
       .then((r) => r.json())
       .then((plan) => {
         setPlan(plan.data)
-        setStudent(plan.student.data)});
+        setStudent(plan.student)});
         onPageChange(`/plans/${params.id}/view`);
   }, [params.id]);
 
@@ -53,13 +53,22 @@ function PrintPlan({ onPageChange }) {
     <h1>Loading...</h1>;
   }
 
-  console.log(student.programs)
-
   return (
 
+    
     <Row>
         <Col>
+            <Row>
+            <Col>
+                <Card className="border-0">
+                    <Card.Body>
+                        <Link to={`/students/${student.id}`}>Back to Student</Link>
+                    </Card.Body>
+                </Card>
+                </Col>
+            </Row>
             <Row className="mx-0 px-0">
+                
                 <Col>
                     <Table responsive borderless size="sm">
                         <thead className="table-light">
@@ -109,7 +118,7 @@ function PrintPlan({ onPageChange }) {
                                     <tbody>
                                         <tr>
                                             <td><strong>Name</strong></td>
-                                            <td>{student.first_name} {student.last_name}</td>
+                                            <td>{student.data.first_name} {student.data.last_name}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Advising Term</strong></td>
@@ -121,11 +130,11 @@ function PrintPlan({ onPageChange }) {
                                         </tr>
                                         <tr>
                                             <td><strong>Graduation Term</strong></td>
-                                            <td><strong className="text-danger">{student.graduation_term}</strong></td>
+                                            <td><strong className="text-danger">{student.data.graduation_term}</strong></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Primary Program</strong></td>
-                                            <td><strong className="text-danger">{student.programs[0].program_name}</strong></td>
+                                            <td><strong className="text-danger">{student.data.programs[0].program_name}</strong></td>
                                         </tr>
 
                                     </tbody>
@@ -146,7 +155,7 @@ function PrintPlan({ onPageChange }) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {student.programs.map((program) => (
+                                        {student.data.programs.map((program) => (
                                             <tr>
                                                 <td>{program.program_type}</td>
                                                 <td>{program.program_name}</td>

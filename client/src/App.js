@@ -7,7 +7,8 @@ import {
   Route,
   useNavigate,
   useMatch,
-  useParams
+  useParams,
+  generatePath
 } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -77,8 +78,6 @@ function App() {
       .then((data) => setStudents(data));
   }, []);
 
-  console.log(students);
-
   useEffect(() => {
     fetch("/plans")
       .then((r) => r.json())
@@ -113,8 +112,6 @@ function App() {
     setPlans(updatedPlans);
   }
 
-  console.log(students)
-
   // this is a comment to test font style
 
   function handleLogout() {
@@ -130,14 +127,15 @@ function App() {
   }
 
   const match = useMatch(page, {
-    path: "/plans/:id/view",
+    path: `/plans/:id/view`,
     exact: true,
     strict: false,
   });
 
   function handleChangePage(page) {
     setPage((page) => page);
-    page === "/plans/:id/view" ? setShowNav(false) : setShowNav(true);
+    console.log(match)
+    page === "/plans/:id/view" ? setShowNav(true) : setShowNav(false);
   }
 
   function navbar() {
@@ -179,9 +177,6 @@ function App() {
     )
   }
 
-  // hide navbar if page is PrintPlan component
-  // match any number between 0 and 1000
-
   if (user) {
     return (
       <div className="App">
@@ -208,6 +203,7 @@ function App() {
                       plans={plans}
                       onEditStudent={handleEditStudent}
                       onDeletePlan={handleDeletePlan}
+                      onPageChange={handleChangePage}
                     />
                   }
                 />
