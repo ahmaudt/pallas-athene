@@ -15,12 +15,12 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, brands, light, thin, duotone, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function AcademicPlanForm({ onUpdatePlan }) {
+function AcademicPlanForm() {
   const params = useParams();
 
   const [payload, setPayload] = useState();
 
-  const [plan, setPlan] = useState({
+  const [planData, setPlanData] = useState({
     advising_term: "",
     current_term: "",
     recommendations: [
@@ -32,13 +32,16 @@ function AcademicPlanForm({ onUpdatePlan }) {
     ],
   });
 
+  const [plan, setPlan] = useState(null)
+
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
     fetch(`/plans/${params.id}`)
       .then((r) => r.json())
       .then((plan) => {
-        setPlan(plan.data);
+        setPlan(plan);
+        setPlanData(plan.data);
         setStudent(plan.student)
       });
   }, [params.id]);
@@ -46,13 +49,13 @@ function AcademicPlanForm({ onUpdatePlan }) {
   // console.log(payload.data);
   // console.log(payload.student);
 
-  const planLength = plan?.recommendations.length
+  const planLength = planData.recommendations.length
   console.log(planLength);
 
   const [rowCount, setRowCount] = useState(planLength);
 
   function handleRecommendationChange(index, name, value) {
-    const updatedRecommendations = plan.recommendations.map(
+    const updatedRecommendations = planData.recommendations.map(
       (recommendation, i) => {
         if (i === index) {
           return { ...recommendation, [name]: value };
@@ -61,25 +64,25 @@ function AcademicPlanForm({ onUpdatePlan }) {
       }
     );
     console.log(updatedRecommendations);
-    setPlan((plan) => ({
-      ...plan,
+    setPlanData((planData) => ({
+      ...planData,
       recommendations: updatedRecommendations,
     }))
   }
 
   const handleAddRow = () => {
     let newRow = { requirement: "", course: "", alt_course: "" };
-    newRow.id = plan.recommendations.length + 1;
-    setPlan((plan) => ({
-      ...plan,
-      recommendations: [...plan.recommendations, newRow],
+    newRow.id = planData.recommendations.length + 1;
+    setPlanData((planData) => ({
+      ...planData,
+      recommendations: [...planData.recommendations, newRow],
     }));
   }
 
   const handleDeleteRow = (i) => {
-    setPlan((plan) => ({
-      ...plan,
-      recommendations: plan.recommendations.filter(
+    setPlanData((planData) => ({
+      ...planData,
+      recommendations: planData.recommendations.filter(
         (recommendation) => recommendation.id !== i
       ),
     }));
@@ -93,51 +96,52 @@ function AcademicPlanForm({ onUpdatePlan }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(plan),
+      body: JSON.stringify({
+        data: planData,
+      }),
     })
       .then((r) => r.json())
-      .then((data) => onUpdatePlan(data));
   }
 
-  const planRecommendations = [...Array(plan.recommendations)].map((r, index) => (
-      plan.recommendations.map((recommendation, i) => (
-      <Row key={i}>
-        <Col sm="3" style={{ paddingRight: "0" }}>
-          <Form.Control
-            type="text"
-            placeholder="requirement"
-            name="requirement"
-            value={recommendation.requirement}
-            onChange={(e) => handleRecommendationChange(i, "requirement", e.target.value)}
-          />
-        </Col>
-        <Col sm="5" style={{ paddingRight: "0", paddingLeft: "0" }}>
-          <Form.Control
-            type="text"
-            placeholder="course"
-            name="course"
-            value={recommendation.course}
-            onChange={(e) => handleRecommendationChange(i, "course", e.target.value)}
-          />
-        </Col>
-        <Col sm="3" style={{ paddingLeft: "0" }}>
-          <Form.Control
-            type="text"
-            placeholder="alt_course"
-            name="alt_course"
-            value={recommendation.alt_course}
-            onChange={(e) => handleRecommendationChange(i, "alt_course", e.target.value)}
-          />
-        </Col>
-        <Col sm="1" style={{ paddingLeft: "0" }}>
-        <FontAwesomeIcon icon={icon({name: 'trash', style: 'solid'})} />
-          {/* <button variant="outline-danger" onClick={(e) => handleDeleteRow(i)}>
+  // const planRecommendations = [...Array(plan.recommendations)].map((r, index) => (
+  //     plan.recommendations.map((recommendation, i) => (
+  //     <Row key={i}>
+  //       <Col sm="3" style={{ paddingRight: "0" }}>
+  //         <Form.Control
+  //           type="text"
+  //           placeholder="requirement"
+  //           name="requirement"
+  //           value={recommendation.requirement}
+  //           onChange={(e) => handleRecommendationChange(i, "requirement", e.target.value)}
+  //         />
+  //       </Col>
+  //       <Col sm="5" style={{ paddingRight: "0", paddingLeft: "0" }}>
+  //         <Form.Control
+  //           type="text"
+  //           placeholder="course"
+  //           name="course"
+  //           value={recommendation.course}
+  //           onChange={(e) => handleRecommendationChange(i, "course", e.target.value)}
+  //         />
+  //       </Col>
+  //       <Col sm="3" style={{ paddingLeft: "0" }}>
+  //         <Form.Control
+  //           type="text"
+  //           placeholder="alt_course"
+  //           name="alt_course"
+  //           value={recommendation.alt_course}
+  //           onChange={(e) => handleRecommendationChange(i, "alt_course", e.target.value)}
+  //         />
+  //       </Col>
+  //       <Col sm="1" style={{ paddingLeft: "0" }}>
+  //       <FontAwesomeIcon icon={icon({name: 'trash', style: 'solid'})} />
+  //         {/* <button variant="outline-danger" onClick={(e) => handleDeleteRow(i)}>
             
-          </button> */}
-        </Col>
-      </Row>
-      ))
-  ));
+  //         </button> */}
+  //       </Col>
+  //     </Row>
+  //     ))
+  // ));
 
   if (!plan) return <h2>Loading...</h2>;
 
@@ -157,8 +161,8 @@ function AcademicPlanForm({ onUpdatePlan }) {
           </CardHeader>
           <Card.Body style={{ padding: "0" }}>
               <FormGroup>
-                {[...Array(plan.recommendations)].map((r, index) => (
-                  plan.recommendations.map((recommendation, i) => (
+                {[...Array(planData.recommendations)].map((r, index) => (
+                  planData.recommendations.map((recommendation, i) => (
                   <Row key={i}>
                     <Col sm="3" style={{ paddingRight: "0" }}>
                       <Form.Control
