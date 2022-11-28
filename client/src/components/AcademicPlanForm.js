@@ -46,7 +46,10 @@ function AcademicPlanForm({ onUpdatePlan }) {
   // console.log(payload.data);
   // console.log(payload.student);
 
-  const [rowCount, setRowCount] = useState(`${plan.recommendations.length}`);
+  const planLength = plan?.recommendations.length
+  console.log(planLength);
+
+  const [rowCount, setRowCount] = useState(planLength);
 
   function handleRecommendationChange(index, name, value) {
     const updatedRecommendations = plan.recommendations.map(
