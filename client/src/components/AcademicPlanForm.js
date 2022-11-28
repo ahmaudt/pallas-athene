@@ -18,8 +18,6 @@ import { solid, regular, brands, light, thin, duotone, icon } from '@fortawesome
 function AcademicPlanForm() {
   const params = useParams();
 
-  const [payload, setPayload] = useState();
-
   const [planData, setPlanData] = useState({
     advising_term: "",
     current_term: "",
@@ -45,14 +43,6 @@ function AcademicPlanForm() {
         setStudent(plan.student)
       });
   }, [params.id]);
-
-  // console.log(payload.data);
-  // console.log(payload.student);
-
-  const planLength = planData.recommendations.length
-  console.log(planLength);
-
-  const [rowCount, setRowCount] = useState(planLength);
 
   function handleRecommendationChange(index, name, value) {
     const updatedRecommendations = planData.recommendations.map(
@@ -80,14 +70,19 @@ function AcademicPlanForm() {
   }
 
   const handleDeleteRow = (i) => {
+
+    // matches row to be deleted with index
+    let newRows = planData.recommendations.filter((rec, idx) => {
+      if (idx !== i) {
+        return rec;
+      }
+    })
+    console.log(newRows);
     setPlanData((planData) => ({
       ...planData,
-      recommendations: planData.recommendations.filter(
-        (recommendation) => recommendation.id !== i
-      ),
-    }));
+      recommendations: newRows
+    }))
   }
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -103,55 +98,10 @@ function AcademicPlanForm() {
       .then((r) => r.json())
   }
 
-  // const planRecommendations = [...Array(plan.recommendations)].map((r, index) => (
-  //     plan.recommendations.map((recommendation, i) => (
-  //     <Row key={i}>
-  //       <Col sm="3" style={{ paddingRight: "0" }}>
-  //         <Form.Control
-  //           type="text"
-  //           placeholder="requirement"
-  //           name="requirement"
-  //           value={recommendation.requirement}
-  //           onChange={(e) => handleRecommendationChange(i, "requirement", e.target.value)}
-  //         />
-  //       </Col>
-  //       <Col sm="5" style={{ paddingRight: "0", paddingLeft: "0" }}>
-  //         <Form.Control
-  //           type="text"
-  //           placeholder="course"
-  //           name="course"
-  //           value={recommendation.course}
-  //           onChange={(e) => handleRecommendationChange(i, "course", e.target.value)}
-  //         />
-  //       </Col>
-  //       <Col sm="3" style={{ paddingLeft: "0" }}>
-  //         <Form.Control
-  //           type="text"
-  //           placeholder="alt_course"
-  //           name="alt_course"
-  //           value={recommendation.alt_course}
-  //           onChange={(e) => handleRecommendationChange(i, "alt_course", e.target.value)}
-  //         />
-  //       </Col>
-  //       <Col sm="1" style={{ paddingLeft: "0" }}>
-  //       <FontAwesomeIcon icon={icon({name: 'trash', style: 'solid'})} />
-  //         {/* <button variant="outline-danger" onClick={(e) => handleDeleteRow(i)}>
-            
-  //         </button> */}
-  //       </Col>
-  //     </Row>
-  //     ))
-  // ));
-
   if (!plan) return <h2>Loading...</h2>;
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col>
-          {/* <StudentInfoForm /> */}
-        </Col>
-      </Row>
     <Row>
       <Col>
         <Card style={{ padding: "0" }} className="rounded-0">
