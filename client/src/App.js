@@ -29,41 +29,13 @@ function App() {
   // students is the state variable for the student list
   const params = useParams();
   const [page, setPage] = useState("/");
-  const [showNav, setShowNav] = useState(null);
   const [students, setStudents] = useState([]);
   const [user, setUser] = useState({
     password: "",
     uga_my_id: ""
   });
-  // const [selectedStudent, setSelectedStudent] = useState({
-  //   id: "",
-  //   ugaMyId: "",
-  //   firstName: "",
-  //   lastName: "",
-  //   matricTerm: "",
-  //   gradTerm: "",
-  //   currentTerm: "",
-  //   advisingTerm: "",
-  //   major: "",
-  //   preProfessional: "",
-  //   earnedHrs: 0,
-  //   requiredHrs: 0,
-  //   remainingHrs: 0,
-  // });
+  
   const [plans, setPlans] = useState([]);
-  // const [workingPlan, setWorkingPlan] = useState({
-  //   studentId: "",
-  //   adviseTerm: "",
-  //   adviseYear: "",
-  //   recommendations: [],
-  // });
-
-  // function handleChangeForm(recommendations) {
-  //   setWorkingPlan((workingPlan) => ({
-  //     ...workingPlan,
-  //     recommendations: recommendations,
-  //   }));
-  // }
 
   useEffect(() => {
     fetch("/user").then((r) => {
@@ -113,80 +85,24 @@ function App() {
     setPlans(updatedPlans);
   }
 
-  // this is a comment to test font style
-
-
   function handleLogout() {
     fetch("/logout", { method: "DELETE" }).then(() => {
       setUser("");
-      navigate("/");
+      navigate("/login");
     });
   }
 
 
   function handleLogin(user) {
     setUser(user);
-    navigate("/home");
-  }
-
-  const match = useMatch(page, {
-    path: `/plans/:id/view`,
-    exact: true,
-    strict: false,
-  });
-
-  function handleChangePage(page) {
-    setPage((page) => page);
-    console.log(match)
-    page === "/plans/:id/view" ? setShowNav(true) : setShowNav(false);
-  }
-
-  function navbar() {
-    return (
-      <Navbar bg="light" expand="lg" className="py-0 mx-0 px-0">
-        <Nav variant="tabs" defaultActiveKey="/">
-        <Nav.Item>
-          <Nav.Link className="rounded-0" as={NavLink} to="/">
-            Home
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            className="rounded-0"
-            as={NavLink}
-            onClick={handleLogout}
-          >
-            Logout
-          </Nav.Link>
-        </Nav.Item>
-        <NavDropdown className="rounded-0" title="Advising">
-          <NavDropdown.Item
-            className="rounded-0"
-            as={NavLink}
-            to="/students"
-          >
-            Students
-          </NavDropdown.Item>
-          <NavDropdown.Item
-            className="rounded-0"
-            as={NavLink}
-            to="/new-student"
-          >
-            New Student
-          </NavDropdown.Item>
-        </NavDropdown>
-        </Nav>
-      </Navbar>  
-    )
+    navigate("/students");
   }
 
   if (user) {
     return (
       <div className="App">
-
         <div className="row">
           <Col>
-          {showNav ? null : navbar()}
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route
@@ -206,7 +122,6 @@ function App() {
                       plans={plans}
                       onEditStudent={handleEditStudent}
                       onDeletePlan={handleDeletePlan}
-                      onPageChange={handleChangePage}
                     />
                   }
                 />
@@ -219,7 +134,7 @@ function App() {
                 />
                 <Route
                   path="/plans/:id/view"
-                  element={<PrintPlan onPageChange={handleChangePage} />}
+                  element={<PrintPlan />}
                 />
                 <Route
                   path="/new-student"
@@ -237,7 +152,8 @@ function App() {
                   path="/login"
                   element={<Login onLogin={handleLogin} />}
                 />
-                <Route path="/logout"
+                <Route
+                  path="/logout"
                   element={<MainNav onLogout={handleLogout} />}
                 />
               </Routes>
