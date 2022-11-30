@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useState } from "react";
 import MainNav from "./MainNav";
+import { Link } from "react-router-dom";
 
-function NewStudentForm({ onAddStudent }) {
+
+function NewStudentForm({ onAddStudent, students }) {
   const navigate = useNavigate();
   const [rowCount, setRowCount] = useState(2);
   const [studentData, setStudentData] = useState({
@@ -181,6 +183,11 @@ function NewStudentForm({ onAddStudent }) {
                   </Card.Body>
                   <Card.Footer>
                   <Button type="submit" variant="primary">Save</Button>
+                  <Link to={`/students/${studentData?.id}`}>
+                    <Button style={{ marginLeft: "10px" }} variant="secondary" type="button">
+                      Cancel
+                    </Button>
+                  </Link>
                 </Card.Footer>
               </Card>
           </Col>
