@@ -19,7 +19,7 @@ function AcademicPlan({ id, current_term, advising_term, onDeletePlan }) {
             <td>{current_term}</td>
             <td>{advising_term}</td>
             <td>
-                <Link to={`/plans/${id}/view`}>
+                <Link to={{ pathname: `/plans/${id}/view` }} target="_blank" >
                     <Button variant="outline-secondary">View</Button>
                 </Link>
             </td>

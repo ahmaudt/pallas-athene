@@ -20,7 +20,7 @@ function StudentPlanList({ plans, onDeletePlan }) {
                   <Card className="rounded-0" style={{ padding: "0" }}>
                     <CardHeader>
                       <h2 className="float-start">Academic Plans</h2>
-                      <Link to={{ pathname:`/students/${params.id}/new_plan`}} target="_blank">
+                      <Link to={`/students/${params.id}/new_plan`}>
                         <Button className="float-end" variant="success">New Plan</Button>
                       </Link>
                     </CardHeader>
