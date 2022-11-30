@@ -20,6 +20,7 @@ import NewAcademicPlanForm from "./components/NewAcademicPlanForm";
 import ViewPlan from "./components/ViewPlan";
 import Login from "./components/Login";
 import PrintPlan from "./components/PrintPlan";
+import MainNav from "./components/MainNav";
 
 function App() {
   const location = useLocation();
@@ -27,41 +28,13 @@ function App() {
   // students is the state variable for the student list
   const params = useParams();
   const [page, setPage] = useState("/");
-  const [showNav, setShowNav] = useState(null);
   const [students, setStudents] = useState([]);
   const [user, setUser] = useState({
     password: "",
     uga_my_id: ""
   });
-  // const [selectedStudent, setSelectedStudent] = useState({
-  //   id: "",
-  //   ugaMyId: "",
-  //   firstName: "",
-  //   lastName: "",
-  //   matricTerm: "",
-  //   gradTerm: "",
-  //   currentTerm: "",
-  //   advisingTerm: "",
-  //   major: "",
-  //   preProfessional: "",
-  //   earnedHrs: 0,
-  //   requiredHrs: 0,
-  //   remainingHrs: 0,
-  // });
+  
   const [plans, setPlans] = useState([]);
-  // const [workingPlan, setWorkingPlan] = useState({
-  //   studentId: "",
-  //   adviseTerm: "",
-  //   adviseYear: "",
-  //   recommendations: [],
-  // });
-
-  // function handleChangeForm(recommendations) {
-  //   setWorkingPlan((workingPlan) => ({
-  //     ...workingPlan,
-  //     recommendations: recommendations,
-  //   }));
-  // }
 
   useEffect(() => {
     fetch("/user").then((r) => {
@@ -111,37 +84,21 @@ function App() {
     setPlans(updatedPlans);
   }
 
-  // this is a comment to test font style
-
   function handleLogout() {
     fetch("/logout", { method: "DELETE" }).then(() => {
       setUser("");
-      navigate("/");
+      navigate("/login");
     });
   }
 
   function handleLogin(user) {
     setUser(user);
-    navigate("/home");
+    navigate("/students");
   }
-
-  const match = useMatch(page, {
-    path: `/plans/:id/view`,
-    exact: true,
-    strict: false,
-  });
-
-  function handleChangePage(page) {
-    setPage((page) => page);
-    match ? setShowNav(false) : setShowNav(true);
-  }
-
-  
 
   if (user) {
     return (
       <div className="App">
-
         <div className="row">
           <Col>
               <Routes>
@@ -163,7 +120,6 @@ function App() {
                       plans={plans}
                       onEditStudent={handleEditStudent}
                       onDeletePlan={handleDeletePlan}
-                      onPageChange={handleChangePage}
                     />
                   }
                 />
@@ -176,7 +132,7 @@ function App() {
                 />
                 <Route
                   path="/plans/:id/view"
-                  element={<PrintPlan onPageChange={handleChangePage} />}
+                  element={<PrintPlan />}
                 />
                 <Route
                   path="/new-student"
@@ -193,6 +149,10 @@ function App() {
                 <Route
                   path="/login"
                   element={<Login onLogin={handleLogin} />}
+                />
+                <Route
+                  path="/logout"
+                  element={<MainNav onLogout={handleLogout} />}
                 />
               </Routes>
           </Col>
