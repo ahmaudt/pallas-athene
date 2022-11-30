@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import StudentListItem from "./StudentListItem";
 import MainNav from "./MainNav";
 
-function StudentList({ students, onSelectStudent }) {
+function StudentList({ students }) {
   const renderStudents = students.map((s) => (
       <StudentListItem
         key={s.id}
