@@ -155,8 +155,8 @@ function PrintPlan({ onPageChange }) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {student.data.programs.map((program) => (
-                                            <tr>
+                                        {student.data.programs.map((program, idx) => (
+                                            <tr key={idx}>
                                                 <td>{program.program_type}</td>
                                                 <td>{program.program_name}</td>
                                                 <td>{program.credit_hrs}</td>
@@ -190,59 +190,7 @@ function PrintPlan({ onPageChange }) {
                     </Card>
                 </Col>
             </Row>
-            {/* <Row className="mx-0 px-0">
-                <Col>
-                    <Card className="rounded-0">
-                            <Card.Header className="bg-danger text-white rounded-0 my-0">
-                                <h2 className="font-weight-bold">Degree Notifications</h2>
-                            </Card.Header>
-                        <Card.Body className="px-0 mx-0 py-0 my-0">
-                                    <Table size="sm">
-                                        <thead className="bg-light">
-                                            <tr>
-                                                <th>University Requirements to Complete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        </tbody>
-                                    </Table>
-                                    <Table size="sm">
-                                        <thead className="bg-light">
-                                            <tr>
-                                                <th>Campus Referrals</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                        </tbody>
-                                    </Table>
-                                    <Table size="sm">
-                                        <thead className="bg-light">
-                                            <tr>
-                                                <th>General Advising Items</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                         
-                                        </tbody>
-                                    </Table>
-                        </Card.Body>
-                    </Card>
-                    <Card className="rounded-0">
-                        <Card.Header className="bg-warning text-white rounded-0">
-                            <h2 className="font-weight-bold">Academic Notifications</h2>
-                        </Card.Header>
-                        <Card.Body>
-                                <Table responsive>
-                                    <tbody>
-                                        
-                                    </tbody>
-                                </Table>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row> */}
+            
             <Row className="mx-0 px-0 py-2">
                 <Col className="py-0 my-0">
                     <Card className="rounded-0">
@@ -261,8 +209,8 @@ function PrintPlan({ onPageChange }) {
                                         </tr>
                                     </thead>
                                     <tbody className="table-hover py-0">
-                                        {plan.recommendations.map((recommendation) => (
-                                            <tr key={recommendation.id} className="py-0 my-0">
+                                        {plan.recommendations.map((recommendation, idx) => (
+                                            <tr key={idx} className="py-0 my-0">
                                                 <td className="py-3 font-weight-bold bg-primary text-white"><FontAwesomeIcon className="float-left mt-1 pr-1 fa-1xs" icon={icon({ name: 'chalkboard-user', style: 'light' })} /> <MarkdownPreview source={recommendation.course} className="bg-primary text-white"/></td>
                                                 <td className="py-3 font-weight-bold bg-success text-white"><MarkdownPreview className="bg-success text-white" source={recommendation.requirement} /></td>
                                                 <td className="py-3 font-weight-bold bg-warning text-white">or</td>

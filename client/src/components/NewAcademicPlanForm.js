@@ -6,6 +6,7 @@ import StudentInfoForm from "./StudentInfoForm";
 import { FcDeleteRow, VscOutput } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import NavBar from "./NavBar";
 
 function NewAcademicPlanForm({ onAddPlan }) {
   const params = useParams();
@@ -99,115 +100,118 @@ function NewAcademicPlanForm({ onAddPlan }) {
   const { requirement, course, alt_course, notes } = planData.recommendations;
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col>
-          <StudentInfoForm currentStudent={student} />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Card style={{ padding: "0" }} className="rounded-0" >
-            <CardHeader>
-              <h2 className="float-start">Student Plan</h2>
-              <Button
-                className="rounded-0 float-end"
-                variant="primary"
-                onClick={handleAddRow}
-              >
-                Add Row
-              </Button>
-            </CardHeader>
-            <Card.Body style={{ padding: "0" }}>
-              <FormGroup>
-                {[...Array(rowCount)].map((r, i) => (
-                  <Row key={i}>
-                    <Col lg="3" style={{ paddingRight: "0" }}>
-                      <Form.Control
-                        className="rounded-0"
-                        type="text"
-                        placeholder="requirement"
-                        name="requirement"
-                        value={requirement}
-                        onChange={(e) =>
-                          handleAddRecommendation(
-                            i,
-                            "requirement",
-                            e.target.value
-                          )
-                        }
-                      />
-                    </Col>
-                    <Col md="4" style={{ paddingRight: "0", paddingLeft: "0" }}>
-                      <Form.Control
-                        className="rounded-0"
-                        type="text"
-                        placeholder="course"
-                        name="course"
-                        value={course}
-                        onChange={(e) =>
-                          handleAddRecommendation(i, "course", e.target.value)
-                        }
-                      />
-                    </Col>
-                    <Col md="4" style={{ paddingLeft: "0", marginRight: "0" }}>
-                      <Form.Control
-                        className="rounded-0"
-                        type="text"
-                        placeholder="alt course"
-                        name="alt_course"
-                        value={alt_course}
-                        onChange={(e) =>
-                          handleAddRecommendation(
-                            i,
-                            "alt_course",
-                            e.target.value
-                          )
-                        }
-                      />
-                    </Col>
-                    <Col
-                      md="auto"
-                      style={{ padding: "0", margin: "0", width: "10px" }}
-                    >
-                      {/* <Button variant="outline-danger" onClick={handleDeleteRow}>Delete Row</Button> */}
-                      <FcDeleteRow size="2em" onClick={handleDeleteRow} />
-                    </Col>
-                  </Row>
-                ))}
-              </FormGroup>
-              <FormGroup style={{ padding: "10px" }}>
-                <Form.Label>Notes</Form.Label>
-                <Form.Control
-                  className="rounded-0"
-                  as="textarea"
-                  placeholder="plan notes"
-                  name="notes"
-                  defaultValue={planData.notes}
-                  onChange={(e) => (planData.notes = e.target.value)}
-                  rows={5}
-                ></Form.Control>
-              </FormGroup>
-            </Card.Body>
-            <Card.Footer>
-              <Button className="rounded-0" variant="success" type="submit">
-                Save
-              </Button>
-              <Link to={`/plans/${planData.id}/view`}>
+    <React.Fragment>
+      <NavBar />
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col>
+            <StudentInfoForm currentStudent={student} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card style={{ padding: "0" }} className="rounded-0" >
+              <CardHeader>
+                <h2 className="float-start">Student Plan</h2>
                 <Button
-                  className="rounded-0"
-                  style={{ marginLeft: "5px" }}
-                  variant="secondary"
-                  type="button"
+                  className="rounded-0 float-end"
+                  variant="primary"
+                  onClick={handleAddRow}
                 >
-                  View Plan
+                  Add Row
                 </Button>
-              </Link>
-            </Card.Footer>
-          </Card>
-        </Col>
-      </Row>
-    </Form>
+              </CardHeader>
+              <Card.Body style={{ padding: "0" }}>
+                <FormGroup>
+                  {[...Array(rowCount)].map((r, i) => (
+                    <Row key={i}>
+                      <Col lg="3" style={{ paddingRight: "0" }}>
+                        <Form.Control
+                          className="rounded-0"
+                          type="text"
+                          placeholder="requirement"
+                          name="requirement"
+                          value={requirement}
+                          onChange={(e) =>
+                            handleAddRecommendation(
+                              i,
+                              "requirement",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </Col>
+                      <Col md="4" style={{ paddingRight: "0", paddingLeft: "0" }}>
+                        <Form.Control
+                          className="rounded-0"
+                          type="text"
+                          placeholder="course"
+                          name="course"
+                          value={course}
+                          onChange={(e) =>
+                            handleAddRecommendation(i, "course", e.target.value)
+                          }
+                        />
+                      </Col>
+                      <Col md="4" style={{ paddingLeft: "0", marginRight: "0" }}>
+                        <Form.Control
+                          className="rounded-0"
+                          type="text"
+                          placeholder="alt course"
+                          name="alt_course"
+                          value={alt_course}
+                          onChange={(e) =>
+                            handleAddRecommendation(
+                              i,
+                              "alt_course",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </Col>
+                      <Col
+                        md="auto"
+                        style={{ padding: "0", margin: "0", width: "10px" }}
+                      >
+                        {/* <Button variant="outline-danger" onClick={handleDeleteRow}>Delete Row</Button> */}
+                        <FcDeleteRow size="2em" onClick={handleDeleteRow} />
+                      </Col>
+                    </Row>
+                  ))}
+                </FormGroup>
+                <FormGroup style={{ padding: "10px" }}>
+                  <Form.Label>Notes</Form.Label>
+                  <Form.Control
+                    className="rounded-0"
+                    as="textarea"
+                    placeholder="plan notes"
+                    name="notes"
+                    defaultValue={planData.notes}
+                    onChange={(e) => (planData.notes = e.target.value)}
+                    rows={5}
+                  ></Form.Control>
+                </FormGroup>
+              </Card.Body>
+              <Card.Footer>
+                <Button className="rounded-0" variant="success" type="submit">
+                  Save
+                </Button>
+                <Link to={`/plans/${planData.id}/view`}>
+                  <Button
+                    className="rounded-0"
+                    style={{ marginLeft: "5px" }}
+                    variant="secondary"
+                    type="button"
+                  >
+                    View Plan
+                  </Button>
+                </Link>
+              </Card.Footer>
+            </Card>
+          </Col>
+        </Row>
+      </Form>
+    </React.Fragment>
   );
 }
 
