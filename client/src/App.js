@@ -85,7 +85,6 @@ function App() {
     });
   }
 
-
   function handleLogin(user) {
     setUser(user);
     navigate("/students");

@@ -7,7 +7,7 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, brands, light, thin, duotone, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function PrintPlan({ onPageChange }) {
+function PrintPlan() {
   const params = useParams();
 
   const [plan, setPlan] = useState({
@@ -46,7 +46,6 @@ function PrintPlan({ onPageChange }) {
       .then((plan) => {
         setPlan(plan.data)
         setStudent(plan.student)});
-        onPageChange(`/plans/${params.id}/view`);
   }, [params.id]);
 
   if (!plan || !student) {
