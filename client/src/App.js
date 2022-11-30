@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Col, Container, NavDropdown, Row, Navbar } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import {
   Routes,
   Route,
