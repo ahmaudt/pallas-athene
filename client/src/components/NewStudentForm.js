@@ -7,7 +7,7 @@ import MainNav from "./MainNav";
 import { Link } from "react-router-dom";
 
 
-function NewStudentForm({ onAddStudent, students }) {
+function NewStudentForm({ onAddStudent }) {
   const navigate = useNavigate();
   const [rowCount, setRowCount] = useState(2);
   const [studentData, setStudentData] = useState({
