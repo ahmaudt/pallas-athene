@@ -4,6 +4,7 @@ import { Card, Col, Row, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useParams } from "react-router-dom";
 import StudentListItem from "./StudentListItem";
+import MainNav from "./MainNav";
 
 function StudentList({ students, onSelectStudent }) {
   const renderStudents = students.map((s) => (
@@ -34,6 +35,7 @@ function StudentList({ students, onSelectStudent }) {
 
   return (
     <React.Fragment>
+      <MainNav />
       <Row>
         <Col>
           <Card style={{ padding: "0" }}>
