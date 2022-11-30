@@ -2,24 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Col, Container, NavDropdown, Row, Navbar } from "react-bootstrap";
 import {
-  NavLink,
   Routes,
   Route,
   useNavigate,
-  useMatch,
   useParams,
-  generatePath
 } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import StudentDetail from "./components/StudentDetail";
 import StudentList from "./components/StudentList";
-import Home from "./components/Home";
 import AcademicPlanForm from "./components/AcademicPlanForm";
 import NewStudentForm from "./components/NewStudentForm";
 import NewAcademicPlanForm from "./components/NewAcademicPlanForm";
-import ViewPlan from "./components/ViewPlan";
 import Login from "./components/Login";
 import PrintPlan from "./components/PrintPlan";
 import MainNav from "./components/MainNav";
@@ -28,7 +22,6 @@ function App() {
   const navigate = useNavigate();
   // students is the state variable for the student list
   const params = useParams();
-  const [page, setPage] = useState("/");
   const [students, setStudents] = useState([]);
   const [user, setUser] = useState({
     password: "",
