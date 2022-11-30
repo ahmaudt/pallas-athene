@@ -54,7 +54,6 @@ function PrintPlan() {
 
   return (
 
-    
     <Row>
         <Col>
             <Row className="mx-0 px-0">
