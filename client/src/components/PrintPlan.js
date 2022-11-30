@@ -57,15 +57,6 @@ function PrintPlan() {
     
     <Row>
         <Col>
-            <Row>
-            <Col>
-                <Card className="border-0">
-                    <Card.Body>
-                        <Link to={`/students/${student.id}`}>Back to Student</Link>
-                    </Card.Body>
-                </Card>
-                </Col>
-            </Row>
             <Row className="mx-0 px-0">
                 
                 <Col>
