@@ -104,7 +104,6 @@ function App() {
         <div className="row">
           <Col>
               <Routes>
-                <Route path="/" element={<Home />} />
                 <Route
                   exact
                   path="/students"
