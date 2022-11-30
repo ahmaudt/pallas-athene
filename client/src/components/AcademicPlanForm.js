@@ -14,7 +14,7 @@ import StudentInfoForm from "./StudentInfoForm";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, brands, light, thin, duotone, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
-import NavBar from "./NavBar";
+import MainNav from "./MainNav";
 
 function AcademicPlanForm() {
   const params = useParams();

@@ -3,7 +3,6 @@ import { Button, Card, Col, Form, FormControl, InputGroup, Row } from "react-boo
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "./NavBar";
 
 function StudentInfoForm({ onEditStudent, onPageChange }) {
   const params = useParams();
@@ -53,7 +52,6 @@ function StudentInfoForm({ onEditStudent, onPageChange }) {
 
   return (
     <React.Fragment>
-      <NavBar />
       <Form onSubmit={handleSubmit}>
           <Row>
             <Col>

@@ -3,7 +3,7 @@ import { Button, Card, CardGroup, Col, Form, FormControl, InputGroup, ListGroup,
 import { useNavigate } from "react-router-dom";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useState } from "react";
-import NavBar from "./NavBar";
+import MainNav from "./MainNav";
 
 function NewStudentForm({ onAddStudent }) {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ function NewStudentForm({ onAddStudent }) {
 
   return (
     <React.Fragment>
-      <NavBar />
+      <MainNav />
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>

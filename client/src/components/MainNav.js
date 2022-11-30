@@ -1,7 +1,15 @@
 import React from "react";
 import { NavDropdown, Navbar, Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-function NavBar() {
+function MainNav() {
+    function handleLogout() {
+        fetch("/logout", { method: "DELETE" }).then(() => {
+          setUser("");
+          navigate("/");
+        });
+      }
+
     return (
       <Navbar bg="light" expand="lg" className="py-0 mx-0 px-0">
         <Nav variant="tabs" defaultActiveKey="/">
@@ -40,4 +48,4 @@ function NavBar() {
     )
   }
 
-  export default NavBar;
+  export default MainNav;

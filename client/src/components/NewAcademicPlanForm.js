@@ -6,7 +6,7 @@ import StudentInfoForm from "./StudentInfoForm";
 import { FcDeleteRow, VscOutput } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import NavBar from "./NavBar";
+import MainNav from "./MainNav";
 
 function NewAcademicPlanForm({ onAddPlan }) {
   const params = useParams();
@@ -101,7 +101,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
 
   return (
     <React.Fragment>
-      <NavBar />
+      <MainNav />
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
