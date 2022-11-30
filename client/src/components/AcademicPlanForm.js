@@ -102,6 +102,7 @@ function AcademicPlanForm() {
 
   return (
     <React.Fragment>
+      <MainNav />
       <Form onSubmit={handleSubmit}>
       <Row>
         <Col>
