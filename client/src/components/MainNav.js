@@ -1,14 +1,9 @@
 import React from "react";
 import { NavDropdown, Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
-function MainNav() {
-    function handleLogout() {
-        fetch("/logout", { method: "DELETE" }).then(() => {
-          setUser("");
-          navigate("/");
-        });
-      }
+function MainNav({ onLogout }) {
 
     return (
       <Navbar bg="light" expand="lg" className="py-0 mx-0 px-0">
@@ -22,7 +17,7 @@ function MainNav() {
           <Nav.Link
             className="rounded-0"
             as={NavLink}
-            onClick={handleLogout}
+            onClick={onLogout}
           >
             Logout
           </Nav.Link>

@@ -7,7 +7,7 @@ function StudentDetail({ onEditStudent, plans, onSelectPlan, onDeletePlan, stude
 
     return (
         <React.Fragment>
-            <MainNav />
+            {/* <MainNav /> */}
             <StudentInfoForm onPageChange={onPageChange} studentId={studentId} onEditStudent={onEditStudent} />
             <StudentPlanList studentId={studentId} plans={plans} onSelectPlan={onSelectPlan} onDeletePlan={onDeletePlan} />
         </React.Fragment>
