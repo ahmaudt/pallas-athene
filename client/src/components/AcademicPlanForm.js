@@ -5,7 +5,9 @@ import {
   Col,
   Card,
   Form,
-  FormGroup
+  FormGroup,
+  InputGroup,
+  FormControl
 } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useParams } from "react-router-dom";
@@ -109,51 +111,55 @@ function AcademicPlanForm() {
         <Col>
           <Card style={{ padding: "0" }} className="rounded-0">
             <CardHeader>
-              <h2 className="float-start">Student Plan</h2>
-              <Button className="float-end" variant="primary" onClick={handleAddRow}>Add Row</Button>
+              <h4>Student Plan</h4>
+              <Button variant="outline-primary" size="sm" onClick={handleAddRow}>Add Row</Button>
             </CardHeader>
-            <Card.Body style={{ padding: "0" }}>
-                <FormGroup>
+            <Card.Body>
+              <InputGroup size="sm" className="rounded-0 py-0">
+                <InputGroup.Text style={{ width: "32.35%"}} className="rounded-0 py-0">
+                  Requirement
+                </InputGroup.Text>
+                <InputGroup.Text style={{ width: "29.60%"}} className="rounded-0 py-0">
+                  Course
+                </InputGroup.Text>
+                <InputGroup.Text style={{ width: "29.50%"}} className="rounded-0 py-0">
+                  Alt Course
+                </InputGroup.Text>
+                <Button variant="danger" style={{ width: "8.5%"}} className="rounded-0 py-0">
+                  Delete
+                </Button>
+              </InputGroup>
                   {[...Array(planData.recommendations)].map((r, index) => (
                     planData.recommendations.map((recommendation, i) => (
-                    <Row key={i}>
-                      <Col sm="3" style={{ paddingRight: "0" }}>
-                        <Form.Control
-                          className="rounded-0"
-                          type="text"
-                          placeholder="requirement"
-                          name="requirement"
-                          value={recommendation.requirement}
-                          onChange={(e) => handleRecommendationChange(i, "requirement", e.target.value)}
-                        />
-                      </Col>
-                      <Col sm="5" style={{ paddingRight: "0", paddingLeft: "0" }}>
-                        <Form.Control
-                          className="rounded-0"
-                          type="text"
-                          placeholder="course"
-                          name="course"
-                          value={recommendation.course}
-                          onChange={(e) => handleRecommendationChange(i, "course", e.target.value)}
-                        />
-                      </Col>
-                      <Col sm="3" style={{ paddingLeft: "0" }}>
-                        <Form.Control
-                          className="rounded-0"
-                          type="text"
-                          placeholder="alt course"
-                          name="alt_course"
-                          value={recommendation.alt_course}
-                          onChange={(e) => handleRecommendationChange(i, "alt_course", e.target.value)}
-                        />
-                      </Col>
-                      <Col sm="1" style={{ paddingLeft: "0" }}>
-                        <Button variant="outline-danger" onClick={(e) => handleDeleteRow(i)}>Delete Row</Button>
-                      </Col>
-                    </Row>
+                    <InputGroup key={i} size="sm" className="rounded-0 py-0">
+                      <InputGroup.Text style={{ width: "3%"}} className="rounded-0 py-0 pl-2">
+                        {i + 1}
+                      </InputGroup.Text>
+                      <FormControl
+                        className="rounded-0 py-0"
+                        type="text"
+                        name="requirement"
+                        value={recommendation.requirement}
+                        onChange={(e) => handleRecommendationChange(i, "requirement", e.target.value)}
+                      />
+                      <FormControl
+                        className="rounded-0"
+                        type="text"
+                        name="course"
+                        value={recommendation.course}
+                        onChange={(e) => handleRecommendationChange(i, "course", e.target.value)}
+                      />
+                      <FormControl
+                        className="rounded-0"
+                        type="text"
+                        name="alt_course"
+                        value={recommendation.alt_course}
+                        onChange={(e) => handleRecommendationChange(i, "alt_course", e.target.value)}
+                      />
+                      <Button className="rounded-0" size="sm" variant="outline-danger" onClick={(e) => handleDeleteRow(i)}>Delete Row</Button>
+                    </InputGroup>
                     ))
                   ))} 
-                </FormGroup>
                 <FormGroup style={{ padding: "10px" }}>
                   <Form.Label>Notes</Form.Label>
                   <Form.Control 
