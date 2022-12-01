@@ -112,7 +112,7 @@ function AcademicPlanForm() {
           <Card style={{ padding: "0" }} className="rounded-0">
             <CardHeader>
               <h4>Student Plan</h4>
-              <Button variant="outline-primary" size="sm" onClick={handleAddRow}>Add Row</Button>
+              <Button className="rounded-0" variant="outline-success" size="sm" onClick={handleAddRow}>Add Row</Button>
             </CardHeader>
             <Card.Body>
               <InputGroup size="sm" className="rounded-0 py-0">
@@ -174,11 +174,11 @@ function AcademicPlanForm() {
                 </FormGroup>
             </Card.Body>
             <Card.Footer>
-              <Button variant="primary" type="submit">
+              <Button size="sm" className="rounded-0" variant="outline-primary" type="submit">
                 Save
               </Button>
               <Link to={`/students/${student?.id}`}>
-                <Button style={{ marginLeft: "10px" }} variant="secondary" type="button">
+                <Button style={{ marginLeft: "10px" }} size="sm" className="rounded-0" variant="outline-secondary" type="button">
                   Cancel
                 </Button>
               </Link>
