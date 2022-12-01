@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 function StudentInfoForm({ onEditStudent }) {
   const params = useParams();
-  const [student, setStudent] = useState({
+  const [studentData, setStudentData] = useState({
       first_name: "",
       last_name: "",
       uga_my_id: "",
@@ -16,11 +16,15 @@ function StudentInfoForm({ onEditStudent }) {
       pre_professional: ""
   });
 
+  const [student, setStudent] = useState(null);
+
   useEffect(() => {
     fetch(`/students/${params.id}`)
       .then((r) => r.json())
-      .then((plan) => {
-        setStudent(plan.data);
+      .then((obj) => {
+        setStudent(obj);
+        setStudentData(obj.data);
+        onEditStudent(obj.data);
       });
   }, [params.id]);
 
@@ -28,26 +32,32 @@ function StudentInfoForm({ onEditStudent }) {
   useEffect(() => {
 })
 
-  function handleEditInfo(e) {
-    const updatedStudent = { ...student, [e.target.name]: e.target.value };
-    setStudent(updatedStudent);
-  }
+function handleEditInfo(e) {
+  const updatedStudentData = { ...studentData, [e.target.name]: e.target.value };
+  const filteredStudentData = updatedStudentData.programs.filter((program) => program.program_name !== "");
+  const updatedStudentDataWithFilteredPrograms = { ...updatedStudentData, programs: filteredStudentData };
+  setStudentData(updatedStudentDataWithFilteredPrograms);
+}
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/students/${params.id}`, {
+    fetch(`/students/${params.id}/edit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(student),
+      body: JSON.stringify({
+        data: studentData,
+      }),
     })
       .then((r) => r.json())
-      // below updates students in the state of App.js
-      .then((data) => onEditStudent(data));
+      // // below updates students in the state of App.js
+      // .then((data) => onEditStudent(data));
   }
 
-  const { first_name, last_name, majors, matriculation_term, graduation_term, uga_my_id, minors, certificates } = student;
+  const { first_name, last_name, uga_my_id, matriculation_term, graduation_term,  pre_professional } = studentData;
+  const { program_name, program_type, program_code, credit_hrs } = studentData.programs;
+  console.log(studentData.pre_professional)
 
   return (
     <React.Fragment>
@@ -59,7 +69,6 @@ function StudentInfoForm({ onEditStudent }) {
                   <h2>Student Information</h2>
                 </CardHeader>
                 <Card.Body>
-                <Row>
                   <InputGroup size="sm" className="rounded-0">
                     <InputGroup.Text className="rounded-0 py-0">
                       First Name
@@ -76,16 +85,30 @@ function StudentInfoForm({ onEditStudent }) {
                     </InputGroup.Text>
                     <Form.Control className="rounded-0" type="text" placeholder="UGA MyID" name="uga_my_id" value={uga_my_id} onChange={handleEditInfo} />
                     <InputGroup.Text className="rounded-0 py-0" size="sm">
-                      Matric
+                      Matriculation Term
                     </InputGroup.Text>
                     <FormControl className="rounded-0" type="text" placeholder="matriculation term" name="matriculation_term" value={matriculation_term} onChange={handleEditInfo} />
                     <InputGroup.Text  className="rounded-0 py-0">
-                      Grad
+                      Graduation Term
                     </InputGroup.Text>
                     <FormControl className="rounded-0 text-end" type="text" placeholder="graduation term" name="graduation_term" value={graduation_term} onChange={handleEditInfo} />
+                    <InputGroup.Text className="rounded-0 py-0">
+                      Pre-Professional
+                    </InputGroup.Text>
+                    <Form.Select size="sm" className="rounded-0 py-0" aria-label="Default select example"  name="pre_professional" value={pre_professional} onChange={handleEditInfo}>
+                        <option>{pre_professional}</option>
+                        <option value="Pre-Med">Pre-Med</option>
+                        <option value="Pre-Law">Pre-Law</option>
+                        <option value="Pre-Dental">Pre-Dental</option>
+                        <option value="Pre-Pharmacy">Pre-Pharmacy</option>
+                        <option value="Pre-Veterinary">Pre-Veterinary</option>
+                        <option value="Pre-Optometry">Pre-Optometry</option>
+                        <option value="Pre-PT">Pre-Physical Therapy</option>
+                        <option value="Pre-OT">Pre-Occupational Therapy</option>
+                        <option value="Pre-PA">Pre-Physician Assistant</option>
+                        <option value="Pre-RN">Pre-Nursing</option>
+                      </Form.Select>
                   </InputGroup>
-                  
-                  </Row>
                 </Card.Body>
                 <Card.Footer>
                   <Button className="rounded-0" type="submit" variant="primary">Save</Button>

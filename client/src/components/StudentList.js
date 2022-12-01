@@ -7,20 +7,20 @@ import StudentListItem from "./StudentListItem";
 import MainNav from "./MainNav";
 
 function StudentList({ students }) {
-  const renderStudents = students.map((s) => (
+  const renderStudents = students?.map((s) => (
       <StudentListItem
         key={s.id}
         firstName={s.data.first_name}
         lastName={s.data.last_name}
         major={
-          s.data.programs.map((program) => {
+          s.data.programs?.map((program) => {
             if (program.program_type === "major") {
               return program.program_code
             }
           })
         }
         minor={
-          s.data.programs.map((program) => {
+          s.data.programs?.map((program) => {
             if (program.program_type === "minor") {
               return program.program_code
             }
@@ -55,7 +55,33 @@ function StudentList({ students }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {renderStudents}
+                  {/* {renderStudents} */}
+                  {
+                    students?.map((s) => (
+                      <StudentListItem
+                        key={s.id}
+                        firstName={s.data.first_name}
+                        lastName={s.data.last_name}
+                        major={
+                          s.data.programs?.map((program) => {
+                            if (program.program_type === "major") {
+                              return program.program_code
+                            }
+                          })
+                        }
+                        minor={
+                          s.data.programs?.map((program) => {
+                            if (program.program_type === "minor") {
+                              return program.program_code
+                            }
+                          })
+                        }
+                        id={s.data.uga_my_id}
+                        student={s}
+                        studentId={s.id}
+                      />
+                    ))
+                  }
                 </tbody>
               </Table>
             </Card.Body>

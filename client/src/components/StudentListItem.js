@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 function StudentListItem({ studentId, firstName, lastName, major, minor }) {
     // should pass in student_id as a prop down to the link
@@ -14,9 +15,9 @@ function StudentListItem({ studentId, firstName, lastName, major, minor }) {
                 <td>{studentId}</td>
                 <td>
                     <Link to={`/students/${studentId}`}>
-                        <button type='button'>
+                        <Button size='sm' className='rounded-0' variant='outline-primary'>
                             View
-                        </button>
+                        </Button>
                     </Link>
                 </td>
             </tr>   

@@ -19,17 +19,17 @@ function AcademicPlan({ id, current_term, advising_term, onDeletePlan }) {
             <td>{current_term}</td>
             <td>{advising_term}</td>
             <td>
-                <Link to={{ pathname: `/plans/${id}/view` }} target="_blank" >
-                    <Button variant="outline-secondary">View</Button>
+                <Link to={`/plans/${id}/view`} target="_blank" >
+                    <Button size="sm" className="rounded-0" variant="outline-secondary">View</Button>
                 </Link>
             </td>
             <td>
                 <Link to={`/plans/${id}/edit`}>
-                    <Button variant="outline-primary">Edit</Button>
+                    <Button size="sm" className="rounded-0" variant="outline-primary">Edit</Button>
                 </Link>
             </td>
             <td>
-                <Button variant="outline-danger" onClick={() => handleDelete(id)}>Delete</Button>
+                <Button size="sm" className="rounded-0" variant="outline-danger" onClick={() => handleDelete(id)}>Delete</Button>
             </td>
       </tr>
     )

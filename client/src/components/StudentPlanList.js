@@ -21,7 +21,7 @@ function StudentPlanList({ plans, onDeletePlan }) {
                     <CardHeader>
                       <h2 className="float-start">Academic Plans</h2>
                       <Link to={`/students/${params.id}/new_plan`}>
-                        <Button className="float-end" variant="success">New Plan</Button>
+                        <Button size="sm" className="float-end rounded-0" variant="outline-success">New Plan</Button>
                       </Link>
                     </CardHeader>
                     <Card.Body>
