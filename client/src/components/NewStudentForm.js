@@ -103,7 +103,7 @@ function NewStudentForm({ onAddStudent }) {
                 <CardHeader>
                   <h2>Student Information</h2>
                 </CardHeader>
-                <Card.Body>
+                <Card.Body style={{ padding: "0" }}>
                   <InputGroup size="sm">
                     <InputGroup.Text className="rounded-0 py-0">
                       First Name
@@ -149,9 +149,9 @@ function NewStudentForm({ onAddStudent }) {
               <Card className="rounded-0" style={{ padding: "0" }}>
                 <CardHeader>
                     <h4>Programs</h4>
-                    <Button variant="outline-primary" size="sm" onClick={handleAddRow}>Add Row</Button>
+                    <Button className="rounded-0" variant="outline-primary" size="sm" onClick={handleAddRow}>Add Row</Button>
                   </CardHeader>
-                  <Card.Body>
+                  <Card.Body style={{ padding: "0" }}>
                     {[...Array(rowCount)].map((r, i) => (
                       <InputGroup key={i} size="sm" className="rounded-0 py-0">
                         <InputGroup.Text className="rounded-0 py-0">
@@ -182,9 +182,9 @@ function NewStudentForm({ onAddStudent }) {
                     ))}
                   </Card.Body>
                   <Card.Footer>
-                  <Button type="submit" variant="primary">Save</Button>
+                  <Button size="sm" className="rounded-0" type="submit" variant="outline-primary">Save</Button>
                   <Link to={`/students/${studentData?.id}`}>
-                    <Button style={{ marginLeft: "10px" }} variant="secondary" type="button">
+                    <Button size="sm" className="rounded-0" style={{ marginLeft: "10px" }} variant="outline-secondary" type="button">
                       Cancel
                     </Button>
                   </Link>
