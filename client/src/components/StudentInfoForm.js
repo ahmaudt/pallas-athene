@@ -24,7 +24,7 @@ function StudentInfoForm({ onEditStudent, studentId }) {
       .then((obj) => {
         setStudent(obj);
         setStudentData(obj.data);
-        onEditStudent(obj.data);
+        // onEditStudent(obj.data);
       });
   }, [params.id]);
 
@@ -57,7 +57,6 @@ function handleEditInfo(e) {
 
   const { first_name, last_name, uga_my_id, matriculation_term, graduation_term,  pre_professional } = studentData;
   const { program_name, program_type, program_code, credit_hrs } = studentData.programs;
-  console.log(studentData.pre_professional)
 
   return (
     <React.Fragment>

@@ -48,8 +48,6 @@ function AcademicPlanForm() {
       });
   }, [params.id]);
 
-  console.log(student?.id)
-
   // console.log(plan?.student)
 
   // useEffect(() => {
@@ -116,6 +114,12 @@ function AcademicPlanForm() {
       .then((r) => r.json())
   }
 
+  function handleAddTerm(e) {
+    setPlanData({ ...planData, [e.target.name]: e.target.value });
+  }
+
+  console.log(planData.current_term);
+
   if (!plan) return <h2>Loading...</h2>;
 
   return (
@@ -144,7 +148,7 @@ function AcademicPlanForm() {
                   type="text"
                   name="current_term"
                   value={planData.current_term}
-                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                  onChange={handleAddTerm}
                 />
               <InputGroup.Text className="rounded-0 py-0">
                   Advising Term
@@ -154,7 +158,7 @@ function AcademicPlanForm() {
                   type="text"
                   name="advising_term"
                   value={planData.advising_term}
-                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                  onChange={handleAddTerm}
                 />
               </InputGroup>
               <InputGroup size="sm" className="rounded-0 py-0">

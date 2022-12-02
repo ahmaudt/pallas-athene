@@ -8,6 +8,10 @@ import { useParams } from "react-router-dom";
 function StudentPlanList({ plans, onDeletePlan }) {
   const params = useParams();
   const studentPlans = plans.filter((p) => p.student.id === parseInt(params.id));
+
+  studentPlans.map((p) => {
+    console.log(p.data.current_term)
+  })
   
   const planList = studentPlans.map((p) => {
     return <AcademicPlan key={p.id} id={p.id} current_term={p.data.current_term} advising_term={p.data.advising_term} onDeletePlan={onDeletePlan} />

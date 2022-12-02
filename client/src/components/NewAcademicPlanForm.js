@@ -87,6 +87,10 @@ function NewAcademicPlanForm({ onAddPlan }) {
     }
   }
 
+  function handleAddTerm(e) {
+    setPlanData({ ...planData, [e.target.name]: e.target.value });
+  }
+
   function handleAddRow() {
     let newRow = { requirement: "", course: "", alt_course: "", notes: "" };
     newRow.id = rowCount.index + 1;
@@ -97,7 +101,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
     setRowCount(rowCount - 1);
   }
 
-  const { requirement, course, alt_course, notes } = planData.recommendations;
+  const { requirement, course, alt_course, notes, current_term, advising_term } = planData.recommendations;
 
 
   return (
@@ -133,8 +137,8 @@ function NewAcademicPlanForm({ onAddPlan }) {
                   className="rounded-0 py-0"
                   type="text"
                   name="current_term"
-                  value={planData.current_term}
-                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                  value={current_term}
+                  onChange={handleAddTerm}
                 />
               <InputGroup.Text className="rounded-0 py-0">
                   Advising Term
@@ -143,8 +147,8 @@ function NewAcademicPlanForm({ onAddPlan }) {
                   className="rounded-0 py-0"
                   type="text"
                   name="advising_term"
-                  value={planData.advising_term}
-                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                  value={advising_term}
+                  onChange={handleAddTerm}
                 />
               </InputGroup>
                   <InputGroup size="sm" className="rounded-0 py-0">
