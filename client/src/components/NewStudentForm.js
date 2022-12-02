@@ -183,7 +183,7 @@ function NewStudentForm({ onAddStudent }) {
                   </Card.Body>
                   <Card.Footer>
                   <Button size="sm" className="rounded-0" type="submit" variant="outline-primary">Save</Button>
-                  <Link to={`/students/${studentData?.id}`}>
+                  <Link to={"/students"}>
                     <Button size="sm" className="rounded-0" style={{ marginLeft: "10px" }} variant="outline-secondary" type="button">
                       Cancel
                     </Button>
