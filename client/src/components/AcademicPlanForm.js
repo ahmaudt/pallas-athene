@@ -114,7 +114,7 @@ function AcademicPlanForm() {
   return (
     <React.Fragment>
       <MainNav />
-      <Form onSubmit={handleSubmit}>
+      <Form>
       <Row>
           <Col>
             <StudentInfoForm studentId={student?.id} />
@@ -122,6 +122,22 @@ function AcademicPlanForm() {
         </Row>
       <Row>
         <Col>
+          <Modal show={showConfirmation} onHide={handleModalClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Confirm Submission</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                Are you sure you want to submit this plan?
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleModalClose}>
+                  Cancel
+                </Button>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </Modal.Footer>
+            </Modal>
           <Card style={{ padding: "0" }} className="rounded-0">
             <CardHeader>
               <h4>Student Plan</h4>
