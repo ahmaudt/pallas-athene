@@ -14,12 +14,13 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import StudentInfoForm from "./StudentInfoForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, brands, light, thin, duotone, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import MainNav from "./MainNav";
 
 function AcademicPlanForm() {
+  const navigate = useNavigate();
   const params = useParams();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const handleModalClose = () => setShowConfirmation(false);
@@ -61,7 +62,6 @@ function AcademicPlanForm() {
         return recommendation;
       }
     );
-    console.log(updatedRecommendations);
     setPlanData((planData) => ({
       ...planData,
       recommendations: updatedRecommendations,
@@ -84,7 +84,6 @@ function AcademicPlanForm() {
         return rec;
       }
     })
-    console.log(newRows);
     setPlanData((planData) => ({
       ...planData,
       recommendations: newRows
@@ -103,6 +102,11 @@ function AcademicPlanForm() {
       }),
     })
       .then((r) => r.json())
+      .then((data) => {
+        handleModalClose();
+        window.open(`/plans/${data.id}/view`, "_blank");
+        navigate(`/students/${data?.student?.id}`);
+      })
   }
 
   function handleAddTerm(e) {
@@ -225,7 +229,7 @@ function AcademicPlanForm() {
                 </FormGroup>
             </Card.Body>
             <Card.Footer>
-              <Button size="sm" className="rounded-0" variant="outline-primary" type="submit">
+              <Button size="sm" className="rounded-0" variant="outline-primary"  onClick={handleModalShow}>
                 Save
               </Button>
               <Link to={`/students/${student?.id}`}>

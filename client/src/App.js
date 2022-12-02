@@ -118,11 +118,7 @@ function App() {
                 />
                 <Route
                   path="/plans/:id/edit"
-                  element={
-                    <AcademicPlanForm
-                    />
-                  }
-                />
+                  element={ <AcademicPlanForm onAddPlan={handleAddPlan} /> } />
                 <Route
                   path="/plans/:id/view"
                   element={<PrintPlan />}
