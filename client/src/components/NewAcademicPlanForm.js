@@ -58,7 +58,9 @@ function NewAcademicPlanForm({ onAddPlan }) {
       .then((r) => r.json())
       .then((data) => {
         onAddPlan(data);
-        navigate(`/plans/${data.id}/view`);
+        handleModalClose();
+        window.open(`/plans/${data.id}/view`, "_blank");
+        navigate(`/students/${advisee_id}`);
       });
   }
 
@@ -110,7 +112,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
   return (
     <React.Fragment>
       <MainNav />
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Row>
           <Col>
             <StudentInfoForm currentStudent={student} />
@@ -118,6 +120,22 @@ function NewAcademicPlanForm({ onAddPlan }) {
         </Row>
         <Row>
           <Col>
+            <Modal show={showConfirmation} onHide={handleModalClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Confirm Submission</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                Are you sure you want to submit this plan?
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleModalClose}>
+                  Cancel
+                </Button>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </Modal.Footer>
+            </Modal>
             <Card style={{ padding: "0" }} className="rounded-0" >
               <CardHeader>
                 <h4 className="float-start">Student Plan</h4>
@@ -235,7 +253,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
                 </FormGroup>
               </Card.Body>
               <Card.Footer>
-                <Button size="sm" className="rounded-0" variant="outline-success" type="submit">
+                <Button size="sm" className="rounded-0" variant="outline-success" onClick={handleModalShow}>
                   Save
                 </Button>
                 <Link to={`/plans/${planData.id}/view`}>
