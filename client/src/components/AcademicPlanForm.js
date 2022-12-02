@@ -118,8 +118,6 @@ function AcademicPlanForm() {
     setPlanData({ ...planData, [e.target.name]: e.target.value });
   }
 
-  console.log(planData.current_term);
-
   if (!plan) return <h2>Loading...</h2>;
 
   return (
