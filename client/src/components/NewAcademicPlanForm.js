@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Row, Col, Card, Form, FormGroup } from "react-bootstrap";
+import { Button, Row, Col, Card, Form, FormGroup, InputGroup } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useState, useEffect } from "react";
 import StudentInfoForm from "./StudentInfoForm";
@@ -99,6 +99,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
 
   const { requirement, course, alt_course, notes } = planData.recommendations;
 
+
   return (
     <React.Fragment>
       <MainNav />
@@ -112,10 +113,11 @@ function NewAcademicPlanForm({ onAddPlan }) {
           <Col>
             <Card style={{ padding: "0" }} className="rounded-0" >
               <CardHeader>
-                <h2 className="float-start">Student Plan</h2>
+                <h4 className="float-start">Student Plan</h4>
                 <Button
+                  size="sm"
                   className="rounded-0 float-end"
-                  variant="primary"
+                  variant="outline-primary"
                   onClick={handleAddRow}
                 >
                   Add Row
@@ -123,11 +125,30 @@ function NewAcademicPlanForm({ onAddPlan }) {
               </CardHeader>
               <Card.Body style={{ padding: "0" }}>
                 <FormGroup>
+                  <InputGroup size="sm" className="rounded-0 py-0">
+                    <InputGroup.Text style={{ width: "3%" }} className="rounded-0 py-0 pl-2">
+                      #
+                    </InputGroup.Text>
+                    <InputGroup.Text style={{ width: "29.65%" }} className="rounded-0 py-0">
+                      Requirement
+                    </InputGroup.Text>
+                    <InputGroup.Text style={{ width: "29.65%" }} className="rounded-0 py-0">
+                      Course
+                    </InputGroup.Text>
+                    <InputGroup.Text style={{ width: "29.50%" }} className="rounded-0 py-0">
+                      Alt Course
+                    </InputGroup.Text>
+                    <Button variant="danger" style={{ width: "8.20%"}} className="rounded-0 py-0">
+                      Delete
+                    </Button>
+                  </InputGroup>
                   {[...Array(rowCount)].map((r, i) => (
-                    <Row key={i}>
-                      <Col lg="3" style={{ paddingRight: "0" }}>
+                    <InputGroup key={i} size="sm" className="rounded-0 py-0">
+                      <InputGroup.Text style={{ width: "3%"}} className="rounded-0 py-0 pl-2">
+                        {i + 1}
+                      </InputGroup.Text>
                         <Form.Control
-                          className="rounded-0"
+                          className="rounded-0 py-0"
                           type="text"
                           placeholder="requirement"
                           name="requirement"
@@ -140,10 +161,8 @@ function NewAcademicPlanForm({ onAddPlan }) {
                             )
                           }
                         />
-                      </Col>
-                      <Col md="4" style={{ paddingRight: "0", paddingLeft: "0" }}>
                         <Form.Control
-                          className="rounded-0"
+                          className="rounded-0 py-0"
                           type="text"
                           placeholder="course"
                           name="course"
@@ -152,10 +171,8 @@ function NewAcademicPlanForm({ onAddPlan }) {
                             handleAddRecommendation(i, "course", e.target.value)
                           }
                         />
-                      </Col>
-                      <Col md="4" style={{ paddingLeft: "0", marginRight: "0" }}>
                         <Form.Control
-                          className="rounded-0"
+                          className="rounded-0 py-0"
                           type="text"
                           placeholder="alt course"
                           name="alt_course"
@@ -168,19 +185,15 @@ function NewAcademicPlanForm({ onAddPlan }) {
                             )
                           }
                         />
-                      </Col>
-                      <Col
-                        md="auto"
-                        style={{ padding: "0", margin: "0", width: "10px" }}
-                      >
                         {/* <Button variant="outline-danger" onClick={handleDeleteRow}>Delete Row</Button> */}
-                        <FcDeleteRow size="2em" onClick={handleDeleteRow} />
-                      </Col>
-                    </Row>
+                        <Button size="sm" variant="outline-danger" className="rounded-0 py-0" onClick={handleDeleteRow}>Delete Row</Button>
+                    </InputGroup>
                   ))}
                 </FormGroup>
                 <FormGroup style={{ padding: "10px" }}>
-                  <Form.Label>Notes</Form.Label>
+                  <Form.Label>
+                    <h5>Notes</h5>
+                  </Form.Label>
                   <Form.Control
                     className="rounded-0"
                     as="textarea"
@@ -193,14 +206,15 @@ function NewAcademicPlanForm({ onAddPlan }) {
                 </FormGroup>
               </Card.Body>
               <Card.Footer>
-                <Button className="rounded-0" variant="success" type="submit">
+                <Button size="sm" className="rounded-0" variant="outline-success" type="submit">
                   Save
                 </Button>
                 <Link to={`/plans/${planData.id}/view`}>
                   <Button
+                    size="sm"
                     className="rounded-0"
                     style={{ marginLeft: "5px" }}
-                    variant="secondary"
+                    variant="outline-secondary"
                     type="button"
                   >
                     View Plan

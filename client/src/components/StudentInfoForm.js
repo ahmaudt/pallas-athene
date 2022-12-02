@@ -68,7 +68,7 @@ function handleEditInfo(e) {
                 <CardHeader>
                   <h2>Student Information</h2>
                 </CardHeader>
-                <Card.Body>
+                <Card.Body style={{ padding: "0" }}>
                   <InputGroup size="sm" className="rounded-0">
                     <InputGroup.Text className="rounded-0 py-0">
                       First Name
@@ -111,7 +111,7 @@ function handleEditInfo(e) {
                   </InputGroup>
                 </Card.Body>
                 <Card.Footer>
-                  <Button className="rounded-0" type="submit" variant="primary">Save</Button>
+                  <Button size="sm" className="rounded-0" type="submit" variant="outline-primary">Save</Button>
                 </Card.Footer>
               </Card>
             </Col>

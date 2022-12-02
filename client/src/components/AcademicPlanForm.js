@@ -73,7 +73,6 @@ function AcademicPlanForm() {
   }
 
   const handleDeleteRow = (i) => {
-
     // matches row to be deleted with index
     let newRows = planData.recommendations.filter((rec, idx) => {
       if (idx !== i) {
