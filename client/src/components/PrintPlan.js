@@ -52,8 +52,6 @@ function PrintPlan() {
     <h1>Loading...</h1>;
   }
 
-  console.log(student.data.matriculation_term)
-
   return (
 
     <Row>
