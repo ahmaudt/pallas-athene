@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Row, Col, Card, Form, FormGroup, InputGroup, FormControl } from "react-bootstrap";
+import { Button, Row, Col, Card, Form, FormGroup, InputGroup, FormControl, Modal } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useState, useEffect } from "react";
 import StudentInfoForm from "./StudentInfoForm";
