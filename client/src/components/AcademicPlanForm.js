@@ -113,9 +113,9 @@ function AcademicPlanForm() {
               <h4>Student Plan</h4>
               <Button className="rounded-0" variant="outline-success" size="sm" onClick={handleAddRow}>Add Row</Button>
             </CardHeader>
-            <Card.Body>
+            <Card.Body style={{ padding: "0" }}>
               <InputGroup size="sm" className="rounded-0 py-0">
-                <InputGroup.Text style={{ width: "32.35%"}} className="rounded-0 py-0">
+                <InputGroup.Text style={{ width: "32.60%"}} className="rounded-0 py-0">
                   Requirement
                 </InputGroup.Text>
                 <InputGroup.Text style={{ width: "29.60%"}} className="rounded-0 py-0">
@@ -124,7 +124,7 @@ function AcademicPlanForm() {
                 <InputGroup.Text style={{ width: "29.50%"}} className="rounded-0 py-0">
                   Alt Course
                 </InputGroup.Text>
-                <Button variant="danger" style={{ width: "8.5%"}} className="rounded-0 py-0">
+                <Button variant="danger" style={{ width: "8.30%"}} className="rounded-0 py-0">
                   Delete
                 </Button>
               </InputGroup>
