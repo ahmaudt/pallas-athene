@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Col, Row, Table} from "react-bootstrap";
+import { Button, Card, Col, Row, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import AcademicPlan from "./AcademicPlan";
 import { Link } from "react-router-dom";

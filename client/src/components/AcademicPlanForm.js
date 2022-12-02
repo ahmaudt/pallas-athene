@@ -7,7 +7,8 @@ import {
   Form,
   FormGroup,
   InputGroup,
-  FormControl
+  FormControl,
+  Modal
 } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useParams } from "react-router-dom";
