@@ -52,6 +52,8 @@ function PrintPlan() {
     <h1>Loading...</h1>;
   }
 
+  console.log(student.data.matriculation_term)
+
   return (
 
     <Row>
@@ -115,7 +117,7 @@ function PrintPlan() {
                                         </tr>
                                         <tr>
                                             <td><strong>Matriculation Term</strong></td>
-                                            <td><strong className="text-primary">{student.matriculation_term}</strong></td>
+                                            <td><strong className="text-primary">{student.data.matriculation_term}</strong></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Graduation Term</strong></td>
