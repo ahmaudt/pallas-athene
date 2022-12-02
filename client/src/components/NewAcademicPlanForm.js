@@ -11,6 +11,8 @@ import MainNav from "./MainNav";
 function NewAcademicPlanForm({ onAddPlan }) {
   const params = useParams();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const handleModalClose = () => setShowConfirmation(false);
+  const handleModalShow = () => setShowConfirmation(true);
   const [rowCount, setRowCount] = useState(4);
 
   const navigate = useNavigate();
