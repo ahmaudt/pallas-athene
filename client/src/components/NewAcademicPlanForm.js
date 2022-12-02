@@ -214,12 +214,17 @@ function NewAcademicPlanForm({ onAddPlan }) {
                     size="sm"
                     className="rounded-0"
                     style={{ marginLeft: "5px" }}
-                    variant="outline-secondary"
+                    variant="outline-primary"
                     type="button"
                   >
                     View Plan
                   </Button>
                 </Link>
+                <Link to={`/students/${student?.id}`}>
+                <Button style={{ marginLeft: "10px" }} size="sm" className="rounded-0" variant="outline-secondary" type="button">
+                  Cancel
+                </Button>
+              </Link>
               </Card.Footer>
             </Card>
           </Col>
