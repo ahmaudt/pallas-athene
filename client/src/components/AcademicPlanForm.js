@@ -37,6 +37,7 @@ function AcademicPlanForm() {
 
   const [student, setStudent] = useState(null);
 
+
   useEffect(() => {
     fetch(`/plans/${params.id}`)
       .then((r) => r.json())
@@ -46,6 +47,21 @@ function AcademicPlanForm() {
         setStudent(plan.student)
       });
   }, [params.id]);
+
+  console.log(student?.id)
+
+  // console.log(plan?.student)
+
+  // useEffect(() => {
+  //   fetch(`/students/${plan.student.id}`)
+  //     .then((r) => r.json())
+  //     .then((obj) => {
+  //       setStudent(obj);
+  //       setStudentData(obj.data);
+  //       onEditStudent(obj.data);
+  //     });
+  // }, [params.id]);
+
 
   function handleRecommendationChange(index, name, value) {
     const updatedRecommendations = planData.recommendations.map(
@@ -106,6 +122,11 @@ function AcademicPlanForm() {
     <React.Fragment>
       <MainNav />
       <Form onSubmit={handleSubmit}>
+      <Row>
+          <Col>
+            <StudentInfoForm studentId={student?.id} />
+          </Col>
+        </Row>
       <Row>
         <Col>
           <Card style={{ padding: "0" }} className="rounded-0">
