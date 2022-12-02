@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Row, Col, Card, Form, FormGroup, InputGroup } from "react-bootstrap";
+import { Button, Row, Col, Card, Form, FormGroup, InputGroup, FormControl } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useState, useEffect } from "react";
 import StudentInfoForm from "./StudentInfoForm";
@@ -125,6 +125,28 @@ function NewAcademicPlanForm({ onAddPlan }) {
               </CardHeader>
               <Card.Body style={{ padding: "0" }}>
                 <FormGroup>
+                <InputGroup style={{ marginBottom: "25px" }} size="sm" className="rounded-0">
+                <InputGroup.Text className="rounded-0 py-0">
+                  Current Term
+                </InputGroup.Text>
+                <FormControl 
+                  className="rounded-0 py-0"
+                  type="text"
+                  name="current_term"
+                  value={planData.current_term}
+                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                />
+              <InputGroup.Text className="rounded-0 py-0">
+                  Advising Term
+                </InputGroup.Text>
+                <FormControl 
+                  className="rounded-0 py-0"
+                  type="text"
+                  name="advising_term"
+                  value={planData.advising_term}
+                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                />
+              </InputGroup>
                   <InputGroup size="sm" className="rounded-0 py-0">
                     <InputGroup.Text style={{ width: "3%" }} className="rounded-0 py-0 pl-2">
                       #

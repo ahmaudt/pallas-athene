@@ -135,6 +135,28 @@ function AcademicPlanForm() {
               <Button className="rounded-0" variant="outline-success" size="sm" onClick={handleAddRow}>Add Row</Button>
             </CardHeader>
             <Card.Body style={{ padding: "0" }}>
+              <InputGroup style={{ marginBottom: "25px" }} size="sm" className="rounded-0">
+                <InputGroup.Text className="rounded-0 py-0">
+                  Current Term
+                </InputGroup.Text>
+                <FormControl 
+                  className="rounded-0 py-0"
+                  type="text"
+                  name="current_term"
+                  value={planData.current_term}
+                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                />
+              <InputGroup.Text className="rounded-0 py-0">
+                  Advising Term
+                </InputGroup.Text>
+                <FormControl 
+                  className="rounded-0 py-0"
+                  type="text"
+                  name="advising_term"
+                  value={planData.advising_term}
+                  onChange={(e) => setPlanData({ ...planData, advising_term: e.target.value })}
+                />
+              </InputGroup>
               <InputGroup size="sm" className="rounded-0 py-0">
                 <InputGroup.Text style={{ width: "32.60%"}} className="rounded-0 py-0">
                   Requirement
