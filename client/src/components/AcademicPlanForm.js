@@ -48,19 +48,6 @@ function AcademicPlanForm() {
       });
   }, [params.id]);
 
-  // console.log(plan?.student)
-
-  // useEffect(() => {
-  //   fetch(`/students/${plan.student.id}`)
-  //     .then((r) => r.json())
-  //     .then((obj) => {
-  //       setStudent(obj);
-  //       setStudentData(obj.data);
-  //       onEditStudent(obj.data);
-  //     });
-  // }, [params.id]);
-
-
   function handleRecommendationChange(index, name, value) {
     const updatedRecommendations = planData.recommendations.map(
       (recommendation, i) => {
