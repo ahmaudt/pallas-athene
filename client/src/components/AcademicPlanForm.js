@@ -21,6 +21,9 @@ import MainNav from "./MainNav";
 
 function AcademicPlanForm() {
   const params = useParams();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const handleModalClose = () => setShowConfirmation(false);
+  const handleModalShow = () => setShowConfirmation(true);
 
   const [planData, setPlanData] = useState({
     advising_term: "",
