@@ -36,7 +36,10 @@ function AcademicPlanForm() {
         alt_course: ""
       }
     ],
+    notes: ""
   });
+
+  console.log(planData.notes);
 
   const [plan, setPlan] = useState(null)
 
@@ -88,6 +91,10 @@ function AcademicPlanForm() {
       ...planData,
       recommendations: newRows
     }))
+  }
+
+  function handleAddNotes(e) {
+    setPlanData({ ...planData, [e.target.name]: e.target.value })
   }
 
   function handleSubmit(e) {
@@ -222,8 +229,8 @@ function AcademicPlanForm() {
                     as="textarea" 
                     placeholder="plan notes"
                     name="notes"
-                    defaultValue={plan.notes}
-                    onChange={(e) => plan.notes = e.target.value}
+                    defaultValue={planData.notes}
+                    onChange={handleAddNotes}
                     rows={5}>
                   </Form.Control>
                 </FormGroup>
