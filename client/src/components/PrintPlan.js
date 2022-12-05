@@ -110,6 +110,14 @@ function PrintPlan() {
                                             <td>{student.data.first_name} {student.data.last_name}</td>
                                         </tr>
                                         <tr>
+                                            <td><strong>UGA MyID</strong></td>
+                                            <td>{student.data.uga_my_id}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Current Term</strong></td>
+                                            <td><strong className="text-secondary">{plan.current_term}</strong></td>
+                                        </tr>
+                                        <tr>
                                             <td><strong>Advising Term</strong></td>
                                             <td><strong className="text-success">{plan.advising_term}</strong></td>
                                         </tr>
@@ -125,6 +133,14 @@ function PrintPlan() {
                                             <td><strong>Primary Program</strong></td>
                                             <td><strong className="text-danger">{student.data.programs[0].program_name}</strong></td>
                                         </tr>
+                                        {
+                                            student.data.pre_professional ? 
+                                                <tr>
+                                                    <td><strong>Pre-Professional</strong></td>
+                                                    <td><strong className="text-danger">{student.data.pre_professional}</strong></td>
+                                                </tr>
+                                                : null
+                                        }
 
                                     </tbody>
                                 </Table>
