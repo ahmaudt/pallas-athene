@@ -32,6 +32,7 @@ class PlansController < ApplicationController
         params.require(:plan).permit(:student_id, :plan, :id, data: [
             :current_term,
             :advising_term,
+            :notes,
             recommendations: [
                 :id,
                 :requirement,

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :core_curriculums
   resources :plans
   resources :students
   resources :users
