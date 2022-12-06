@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Card, Col, Row, Table } from "react-bootstrap";
+import { Card, Col, FormControl, Row, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useParams } from "react-router-dom";
 import StudentListItem from "./StudentListItem";
@@ -32,6 +32,17 @@ function StudentList({ students }) {
       />
     ));
 
+    function filteredStudents(search_term) {
+        students?.filter((s) => {
+          if (s.data.first_name === search_term || s.data.last_name === search_term  || s.data.programs[0].major_code === search_term) {
+            return s
+          }
+        })
+    }
+
+    function onStudentSearch(e) {
+      console.log(e.target.value)
+    }
 
   return (
     <React.Fragment>
@@ -41,6 +52,7 @@ function StudentList({ students }) {
           <Card style={{ padding: "0" }}>
             <Card.Header>
               <h2>Students</h2>
+              <FormControl type="text" placeholder="search" onChange={onStudentSearch}/>
             </Card.Header>
             <Card.Body>
               <Table striped borderless size="sm">
