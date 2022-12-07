@@ -13,24 +13,15 @@ function Login({ onLogin }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ uga_my_id: uga_my_id, password: password_digest }),
+            body: JSON.stringify({
+                uga_my_id: uga_my_id,
+                password: password_digest 
+            }),
         })
-        .then((r) => r.json())
+        .then((res) => res.json())
         .then((user) => {
             onLogin(user)
         })
-        // fetch("/login", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({ uga_my_id, password }),
-        //     })
-        //     .then((r) => r.json())
-        //     .then((user) => {
-        //         onLogin(user);
-        //     }
-        // );
     }
 
     return (
@@ -48,7 +39,7 @@ function Login({ onLogin }) {
                     type="password"
                     placeholder="Enter Password"
                     value={password_digest}
-                    onChange={(e) => setPasswordDigest(e.target.value)}
+                    onChange={(e) => setPasswordDigest(...password_digest, e.target.value)}
                 />
             </Form.Group>
             
