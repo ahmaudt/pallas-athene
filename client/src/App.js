@@ -61,12 +61,7 @@ function App() {
   })
 
   function handleEditStudent(student) {
-    // const updatedStudents = students.map((s) => {
-    //   if (s.id === student.id) return student;
-    //   return s;
-    // });
     setStudents(students.map((s) => (s.id === student.id ? student : s)));
-    // setStudents(updatedStudents);
   }
 
   function handleAddStudent(student) {

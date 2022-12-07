@@ -28,7 +28,7 @@ function StudentList({ students, searchItem, onSearchChange }) {
         }
         id={s.data.uga_my_id}
         student={s}
-        studentId={s.id}
+        studentId={s.data.uga_my_id}
       />
     ));
 
@@ -51,38 +51,12 @@ function StudentList({ students, searchItem, onSearchChange }) {
                     <th>First Name</th>
                     <th>Major</th>
                     <th>Minor</th>
-                    <th>Student ID</th>
+                    <th>UGA MyID</th>
                     <th>View</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {renderStudents} */}
-                  {
-                    students?.map((s) => (
-                      <StudentListItem
-                        key={s.id}
-                        firstName={s.data.first_name}
-                        lastName={s.data.last_name}
-                        major={
-                          s.data.programs?.map((program) => {
-                            if (program.program_type === "major") {
-                              return program.program_code
-                            }
-                          })
-                        }
-                        minor={
-                          s.data.programs?.map((program) => {
-                            if (program.program_type === "minor") {
-                              return program.program_code
-                            }
-                          })
-                        }
-                        id={s.data.uga_my_id}
-                        student={s}
-                        studentId={s.id}
-                      />
-                    ))
-                  }
+                  {renderStudents}
                 </tbody>
               </Table>
             </Card.Body>
