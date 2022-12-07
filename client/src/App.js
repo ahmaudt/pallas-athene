@@ -56,9 +56,9 @@ function App() {
   };
 
 
-  // const displayedStudents = students?.filter((student) => {
-  //   return student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase())
-  // })
+  const displayedStudents = students?.filter((student) => {
+    return student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase())
+  })
 
   function handleEditStudent(student) {
     setStudents(students.map((s) => (s.id === student.id ? student : s)));
