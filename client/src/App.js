@@ -22,14 +22,14 @@ function App() {
   const navigate = useNavigate();
   // students is the state variable for the student list
   const params = useParams();
-  const [students, setStudents] = useState([]);
+  // const [students, setStudents] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [user, setUser] = useState({
     password: "",
     uga_my_id: ""
   });
   
-  const [plans, setPlans] = useState([]);
+  // const [plans, setPlans] = useState([]);
 
   useEffect(() => {
     fetch("/user").then((r) => {
@@ -39,26 +39,9 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    fetch("/students")
-      .then((r) => r.json())
-      .then((data) => setStudents(data));
-  }, [user]);
-
-  useEffect(() => {
-    fetch("/plans")
-      .then((r) => r.json())
-      .then((data) => setPlans(data));
-  }, [user]);
-
   const handleSelectStudent = (student) => {
     setSelectedStudent(student);
   };
-
-
-  const displayedStudents = students?.filter((student) => {
-    return student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase())
-  })
 
   function handleEditStudent(student) {
     setStudents(students.map((s) => (s.id === student.id ? student : s)));
@@ -91,9 +74,7 @@ function App() {
     navigate("/students");
   }
 
-  if (!user) {
-    return <Login onLogin={handleLogin} />;
-  } else {
+  if (user) {
     return (
       <div className="App">
         <div className="row">
@@ -104,7 +85,6 @@ function App() {
                   path="/students"
                   element={
                     <StudentList
-                      students={displayedStudents}
                       onSearchChange={setSearchItem}
                       searchItem={searchItem}
                     />
@@ -115,26 +95,24 @@ function App() {
                   path="/students/:id"
                   element={
                     <StudentDetail
-                      plans={plans}
-                      onEditStudent={handleEditStudent}
-                      onDeletePlan={handleDeletePlan}
+                      
                     />
                   }
                 />
                 <Route
                   path="/plans/:id/edit"
-                  element={ <AcademicPlanForm onAddPlan={handleAddPlan} /> } />
+                  element={ <AcademicPlanForm  /> } />
                 <Route
                   path="/plans/:id/view"
                   element={<PrintPlan />}
                 />
                 <Route
                   path="/new-student"
-                  element={<NewStudentForm onAddStudent={handleAddStudent} />}
+                  element={<NewStudentForm />}
                 />
                 <Route
                   path="/students/:id/new_plan"
-                  element={<NewAcademicPlanForm onAddPlan={handleAddPlan} />}
+                  element={<NewAcademicPlanForm />}
                 />
                 <Route
                   path="/generated-plan"
@@ -153,6 +131,8 @@ function App() {
         </div>
       </div>
     );
+  } else {
+    return <Login onLogin={handleLogin} />;
   }
 }
 

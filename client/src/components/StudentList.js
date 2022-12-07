@@ -6,8 +6,21 @@ import { useParams } from "react-router-dom";
 import StudentListItem from "./StudentListItem";
 import MainNav from "./MainNav";
 
-function StudentList({ students, searchItem, onSearchChange }) {
-  const renderStudents = students?.map((s) => (
+function StudentList({ searchItem, onSearchChange }) {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetch("/students")
+      .then((r) => r.json())
+      .then((data) => setStudents(data));
+  }, []);
+
+  const displayedStudents = students?.filter((student) => {
+    return student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase())
+  })
+
+
+  const renderStudents = displayedStudents?.map((s) => (
       <StudentListItem
         key={s.id}
         firstName={s.data.first_name}
