@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "core curriculum schema",
+    "description": "defines the data structure for the core curriculum and the courses eligible to fulfill it",
+    "type": "object",
+    "properties": {
+        "core_area": {
+            "description": "the core area",
+            "type": "string"
+        },
+        "courses": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "course_code": {
+                        "type": "string"
+                    },
+                    "credit_hrs": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,2 +1,10 @@
 node_modules
 node_modules
+hdfs_sage_students.csv
+secw_sage_students.csv
+seeds.rb
+hdfs_students.csv
+db.json
+.gitignore
+.byebug_history
+.DS_Store
