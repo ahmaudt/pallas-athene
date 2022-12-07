@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :api do
-    delete '/user', to: 'users#destroy'
-    post '/students/new-student', to: 'students#create'
-    post '/students/:id/edit', to: 'students#update'
-    post '/plans/:id/edit', to: 'plans#edit'
-    delete '/plans/:id/delete', to: 'plans#destroy'
-    post '/plans/new_plan', to: 'plans#create'
+    
   end
 
     resources :core_curriculums
@@ -23,6 +18,12 @@ Rails.application.routes.draw do
     get '/plans', to: 'plans#index'
     get '/plans/:id', to: 'plans#show'
     delete '/logout', to: 'sessions#destroy'
+    delete '/user', to: 'users#destroy'
+    post '/students/new-student', to: 'students#create'
+    post '/students/:id/edit', to: 'students#update'
+    post '/plans/:id/edit', to: 'plans#edit'
+    delete '/plans/:id/delete', to: 'plans#destroy'
+    post '/plans/new_plan', to: 'plans#create'
 
     
     
