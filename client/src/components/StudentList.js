@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import StudentListItem from "./StudentListItem";
 import MainNav from "./MainNav";
 
-function StudentList({ students }) {
+function StudentList({ students, searchItem, onSearchChange }) {
   const renderStudents = students?.map((s) => (
       <StudentListItem
         key={s.id}
@@ -32,17 +32,6 @@ function StudentList({ students }) {
       />
     ));
 
-    function filteredStudents(search_term) {
-        students?.filter((s) => {
-          if (s.data.first_name === search_term || s.data.last_name === search_term  || s.data.programs[0].major_code === search_term) {
-            return s
-          }
-        })
-    }
-
-    function onStudentSearch(e) {
-      console.log(e.target.value)
-    }
 
   return (
     <React.Fragment>
@@ -52,7 +41,7 @@ function StudentList({ students }) {
           <Card style={{ padding: "0" }}>
             <Card.Header>
               <h2>Students</h2>
-              <FormControl type="text" placeholder="search" onChange={onStudentSearch}/>
+              <FormControl type="text" placeholder="search" value={searchItem} onChange={(e) => onSearchChange(e.target.value)}/>
             </Card.Header>
             <Card.Body>
               <Table striped borderless size="sm">

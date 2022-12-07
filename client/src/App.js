@@ -23,6 +23,7 @@ function App() {
   // students is the state variable for the student list
   const params = useParams();
   const [students, setStudents] = useState([]);
+  const [searchItem, setSearchItem] = useState("");
   const [user, setUser] = useState({
     password: "",
     uga_my_id: ""
@@ -53,6 +54,11 @@ function App() {
   const handleSelectStudent = (student) => {
     setSelectedStudent(student);
   };
+
+
+  const displayedStudents = students?.filter((student) => {
+    return student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase())
+  })
 
   function handleEditStudent(student) {
     // const updatedStudents = students.map((s) => {
@@ -101,7 +107,9 @@ function App() {
                   path="/students"
                   element={
                     <StudentList
-                      students={students}
+                      students={displayedStudents}
+                      onSearchChange={setSearchItem}
+                      searchItem={searchItem}
                     />
                   }
                 />
