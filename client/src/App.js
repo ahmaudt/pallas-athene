@@ -5,7 +5,7 @@ import {
   Routes,
   Route,
   useNavigate,
-  useParams,
+  useParams
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -91,7 +91,9 @@ function App() {
     navigate("/students");
   }
 
-  if (user) {
+  if (!user) {
+    return <Login onLogin={handleLogin} />;
+  } else {
     return (
       <div className="App">
         <div className="row">
@@ -151,8 +153,6 @@ function App() {
         </div>
       </div>
     );
-  } else {
-    return <Login onLogin={handleLogin} />;
   }
 }
 
