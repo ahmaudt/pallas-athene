@@ -39,17 +39,17 @@ function App() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   fetch("/students")
-  //     .then((r) => r.json())
-  //     .then((data) => setStudents(data));
-  // }, [user]);
+  useEffect(() => {
+    fetch("/students")
+      .then((r) => r.json())
+      .then((data) => setStudents(data));
+  }, [user]);
 
-  // useEffect(() => {
-  //   fetch("/plans")
-  //     .then((r) => r.json())
-  //     .then((data) => setPlans(data));
-  // }, [user]);
+  useEffect(() => {
+    fetch("/plans")
+      .then((r) => r.json())
+      .then((data) => setPlans(data));
+  }, [user]);
 
   const handleSelectStudent = (student) => {
     setSelectedStudent(student);
