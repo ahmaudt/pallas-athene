@@ -4,7 +4,11 @@ import { Button, Form } from 'react-bootstrap';
 
 function Login({ onLogin }) {
     const [uga_my_id, setUgaMyId] = useState("");
-    const [password_digest, setPasswordDigest] = useState("");
+    const [password, setPasswordDigest] = useState("");
+    const [user, setUser] = useState({
+        password: "",
+        uga_my_id: ""
+    });
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -13,10 +17,7 @@ function Login({ onLogin }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                uga_my_id: uga_my_id,
-                password: password_digest 
-            }),
+            body: JSON.stringify(user),
         })
         .then((res) => res.json())
         .then((user) => {
@@ -31,15 +32,17 @@ function Login({ onLogin }) {
                 <Form.Control
                     type="text"
                     placeholder="Enter UGA MyID"
+                    name='uga_my_id'
                     value={uga_my_id}
-                    onChange={(e) => setUgaMyId(e.target.value)}
+                    onChange={(e) => setUser({[e.target.name]: e.target.value})}
                 />
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                     type="password"
                     placeholder="Enter Password"
-                    value={password_digest}
-                    onChange={(e) => setPasswordDigest(...password_digest, e.target.value)}
+                    name='password'
+                    value={password}
+                    onChange={(e) => setUser({[e.target.name]: e.target.value})}
                 />
             </Form.Group>
             
