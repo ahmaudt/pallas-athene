@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     post '/students/:id/edit', to: 'students#update'
     post '/plans/:id/edit', to: 'plans#edit'
     delete '/plans/:id/delete', to: 'plans#destroy'
-    get '/plans/:id/view', to: 'plans#show'
     post '/plans/new_plan', to: 'plans#create'
   end
 
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
     # Routing logic: fallback requests for React Router.
     # Leave this here to help deploy your app later!
     get '/user', to: 'users#show'
+    get '/plans/:id/view', to: 'plans#show'
     post '/login', to: 'sessions#create'
     get '/students', to: 'students#index'
     get '/students/:id', to: 'students#show'
