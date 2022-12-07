@@ -17,6 +17,10 @@
       "description": "the student's last name",
       "type": "string"
     },
+    "email": {
+      "description": "the student's e-mail address",
+      "type": "string"
+    },
     "matriculation_term": {
       "description": "the term the student matriculated",
       "type": "string"

@@ -36,6 +36,7 @@ class StudentsController < ApplicationController
             :uga_my_id,
             :first_name,
             :last_name,
+            :email,
             :matriculation_term,
             :graduation_term,
             :pre_professional,

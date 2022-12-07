@@ -1,6 +1,7 @@
 {
   "name": "pallas-athene",
   "description": "Build scripts for Heroku",
+  "main": "index.js",
   "engines": {
     "node": "16.x"
   },
