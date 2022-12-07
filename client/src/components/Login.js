@@ -13,7 +13,7 @@ function Login({ onLogin }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ uga_my_id, password_digest }),
+            body: JSON.stringify({ uga_my_id: uga_my_id, password: password_digest }),
         })
         .then((r) => r.json())
         .then((user) => {
