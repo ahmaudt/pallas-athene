@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  
-  namespace :api do
+
     resources :core_curriculums
     resources :plans
     resources :students
@@ -21,7 +20,6 @@ Rails.application.routes.draw do
     delete '/plans/:id/delete', to: 'plans#destroy'
     get '/plans/:id/view', to: 'plans#show'
     post '/plans/new_plan', to: 'plans#create'
-  end
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
