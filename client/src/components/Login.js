@@ -17,11 +17,12 @@ function Login({ onLogin }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify({ password: password, uga_my_id: uga_my_id}),
         })
         .then((res) => res.json())
-        .then((user) => {
-            onLogin(user)
+        .then((data) => {
+            console.log(data)
+            // onLogin(user)
         })
     }
 
@@ -34,7 +35,7 @@ function Login({ onLogin }) {
                     placeholder="Enter UGA MyID"
                     name='uga_my_id'
                     value={uga_my_id}
-                    onChange={(e) => setUser({[e.target.name]: e.target.value})}
+                    onChange={(e) => setUgaMyId(e.target.value)}
                 />
                 <Form.Label>Password</Form.Label>
                 <Form.Control
@@ -42,7 +43,7 @@ function Login({ onLogin }) {
                     placeholder="Enter Password"
                     name='password'
                     value={password}
-                    onChange={(e) => setUser({[e.target.name]: e.target.value})}
+                    onChange={(e) => setPasswordDigest(e.target.value)}
                 />
             </Form.Group>
             
