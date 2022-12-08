@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
 
-  namespace :api do
-    
-  end
-
-    resources :core_curriculums
-    resources :plans
-    resources :students
-    resources :users
+    # resources :core_curriculums
+    # resources :plans
+    # resources :students
+    # resources :users
     # Routing logic: fallback requests for React Router.
     # Leave this here to help deploy your app later!
+    root to: 'welcome#index'
     get '/user', to: 'users#show'
     get '/plans/:id/view', to: 'plans#show'
     post '/login', to: 'sessions#create'
