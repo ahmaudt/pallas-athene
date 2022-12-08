@@ -22,6 +22,6 @@ Rails.application.routes.draw do
     delete '/plans/:id/delete', to: 'plans#destroy'
     post '/plans/new_plan', to: 'plans#create'
 
-  # get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
 end
