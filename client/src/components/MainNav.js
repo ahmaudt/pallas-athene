@@ -19,7 +19,7 @@ function MainNav({ onLogout }) {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="rounded-0" as={NavLink} to="new-student">
+            <Nav.Link className="rounded-0" as={NavLink} to="/new_student">
               New Student
             </Nav.Link>
           </Nav.Item>

@@ -4,8 +4,10 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import AcademicPlan from "./AcademicPlan";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function StudentPlanList({  }) {
+  const [plans, setPlans] = useState([]);
   const params = useParams();
 
   useEffect(() => {

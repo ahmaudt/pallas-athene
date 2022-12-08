@@ -1,4 +1,6 @@
 import React from "react";
+import fetch from 'isomorphic-fetch';
+import runtimeEnv from '@mars/heroku-js-runtime-env';
 import { useState, useEffect } from "react";
 import { Col } from "react-bootstrap";
 import {
@@ -94,9 +96,7 @@ function App() {
                   exact
                   path="/students/:id"
                   element={
-                    <StudentDetail
-                      
-                    />
+                    <StudentDetail/>
                   }
                 />
                 <Route
@@ -110,7 +110,7 @@ function App() {
                 />
                 <Route
                   exact
-                  path="/new-student"
+                  path="/new_student"
                   element={<NewStudentForm />}
                 />
                 <Route
