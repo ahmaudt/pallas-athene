@@ -100,29 +100,36 @@ function App() {
                   }
                 />
                 <Route
+                  exact
                   path="/plans/:id/edit"
                   element={ <AcademicPlanForm  /> } />
                 <Route
+                  exact
                   path="/plans/:id/view"
                   element={<PrintPlan />}
                 />
                 <Route
+                  exact
                   path="/new-student"
                   element={<NewStudentForm />}
                 />
                 <Route
+                  exact
                   path="/students/:id/new_plan"
                   element={<NewAcademicPlanForm />}
                 />
                 <Route
+                  exact
                   path="/generated-plan"
                   element={<PrintPlan />}
                 />
                 <Route
+                  exact
                   path="/login"
                   element={<Login onLogin={handleLogin} />}
                 />
                 <Route
+                  exact
                   path="/logout"
                   element={<MainNav onLogout={handleLogout} />}
                 />
