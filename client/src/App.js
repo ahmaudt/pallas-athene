@@ -31,13 +31,13 @@ function App() {
   
   // const [plans, setPlans] = useState([]);
 
-  useEffect(() => {
-    fetch("/user").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/user").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //   });
+  // }, []);
 
   const handleSelectStudent = (student) => {
     setSelectedStudent(student);
