@@ -120,6 +120,7 @@ function App() {
                   }
                 />
                 <Route
+                  exact
                   path="/plans/:id/edit"
                   element={ <AcademicPlanForm onAddPlan={handleAddPlan} /> } />
                 <Route
@@ -127,24 +128,33 @@ function App() {
                   element={<PrintPlan />}
                 />
                 <Route
+                  exact
                   path="/new-student"
                   element={<NewStudentForm onAddStudent={handleAddStudent} />}
                 />
                 <Route
+                  exact
                   path="/students/:id/new_plan"
                   element={<NewAcademicPlanForm onAddPlan={handleAddPlan} />}
                 />
                 <Route
+                  exact
                   path="/generated-plan"
                   element={<PrintPlan />}
                 />
                 <Route
+                  exact
                   path="/login"
                   element={<Login onLogin={handleLogin} />}
                 />
                 <Route
                   path="/logout"
                   element={<MainNav onLogout={handleLogout} />}
+                />
+                <Route
+                  exact
+                  path="/new_plan"
+                  element={<NewAcademicPlanForm onAddPlan={handleAddPlan} />}
                 />
               </Routes>
           </Col>
