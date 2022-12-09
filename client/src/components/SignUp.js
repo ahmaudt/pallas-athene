@@ -13,7 +13,7 @@ function SignUp({ onSignUp }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/api/vi/signup", {
+    fetch("/api/v1/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
