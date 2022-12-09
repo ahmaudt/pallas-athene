@@ -6,11 +6,13 @@ Rails.application.routes.draw do
     # resources :users
     # Routing logic: fallback requests for React Router.
     # Leave this here to help deploy your app later!
-    root to: 'welcome#index'
+    namespace :api do
+      get '/students', to: 'students#index'
+    end
+
     get '/user', to: 'users#show'
     get '/plans/:id/view', to: 'plans#show'
     post '/login', to: 'sessions#create'
-    get '/students', to: 'students#index'
     get '/students/:id', to: 'students#show'
     get '/plans', to: 'plans#index'
     get '/plans/:id', to: 'plans#show'
