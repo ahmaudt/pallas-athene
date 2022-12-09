@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://dev.timaeus.pro',
+            target: 'https://radiant-chamber-13554.herokuapp.com',
             changeOrigin: true,
         })
     )
