@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get '/plans', to: 'plans#index'
     get '/plans/:id', to: 'plans#show'
     delete '/logout', to: 'sessions#destroy'
-    delete '/user', to: 'users#destroy'
+    delete '/user', to: 'users#destroy_session'
     post '/students/new_student', to: 'students#create'
     post '/students/:id/edit', to: 'students#update'
     post '/plans/:id/edit', to: 'plans#edit'
