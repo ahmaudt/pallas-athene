@@ -1,7 +1,6 @@
 class User < ApplicationRecord
     has_many :students
     has_many :plans, through: :students
-    attr_accessible :email, :first_name, :last_name, :password, :password_digest, :password_confirmation
     validates :uga_my_id, presence: true, uniqueness: true
     has_secure_password
 
