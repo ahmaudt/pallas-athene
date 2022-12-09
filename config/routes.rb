@@ -23,8 +23,6 @@ Rails.application.routes.draw do
       post '/plans/new_plan', to: 'plans#create'
     end
 
-    
-
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
 end
