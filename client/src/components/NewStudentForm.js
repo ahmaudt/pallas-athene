@@ -36,7 +36,7 @@ function NewStudentForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/students", {
+    fetch("/api/vi/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
