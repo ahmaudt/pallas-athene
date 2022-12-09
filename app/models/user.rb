@@ -1,8 +1,9 @@
 class User < ApplicationRecord
     has_many :students
     has_many :plans, through: :students
-    has_secure_password
     validates :uga_my_id, presence: true, uniqueness: true
+    has_secure_password
+    
     def show
         user = User.find_by(id: session[:user_id])
         if user
