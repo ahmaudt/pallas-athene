@@ -1,13 +1,11 @@
 import React from "react";
 import fetch from 'isomorphic-fetch';
-import runtimeEnv from '@mars/heroku-js-runtime-env';
 import { useState, useEffect } from "react";
 import { Col } from "react-bootstrap";
 import {
   Routes,
   Route,
-  useNavigate,
-  useParams
+  useNavigate
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -22,9 +20,6 @@ import MainNav from "./components/MainNav";
 
 function App() {
   const navigate = useNavigate();
-  // students is the state variable for the student list
-  const params = useParams();
-  // const [students, setStudents] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [user, setUser] = useState({
     password: "",
