@@ -32,7 +32,7 @@ function NewAcademicPlanForm({ onAddPlan }) {
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    fetch(`/students/${params.id}`)
+    fetch(`/api/students/${params.id}`)
       .then((r) => r.json())
       .then((payload) => {
         setStudent(payload);

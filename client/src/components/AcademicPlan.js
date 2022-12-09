@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 
 function AcademicPlan({ id, current_term, advising_term, onDeletePlan }) {
     function handleDelete(id) {
-        fetch(`/plans/${id}/delete`, {
+        fetch(`/api/plans/${id}/delete`, {
             method: "DELETE"
         })
         .then((r) => r.json())

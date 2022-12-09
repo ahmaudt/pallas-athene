@@ -10,7 +10,7 @@ function StudentList({ searchItem, onSearchChange }) {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    fetch("/students")
+    fetch("/api/students")
       .then((r) => r.json())
       .then((data) => setStudents(data));
   }, []);

@@ -19,7 +19,7 @@ function StudentInfoForm({ onEditStudent, studentId }) {
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    fetch(`/students/${studentId || params.id}`)
+    fetch(`/api/students/${studentId || params.id}`)
       .then((r) => r.json())
       .then((obj) => {
         setStudent(obj);
