@@ -1,8 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Card, Col, FormControl, Row, Table } from "react-bootstrap";
-import CardHeader from "react-bootstrap/esm/CardHeader";
-import { useParams } from "react-router-dom";
 import StudentListItem from "./StudentListItem";
 import MainNav from "./MainNav";
 
@@ -16,9 +14,10 @@ function StudentList({ searchItem, onSearchChange }) {
   }, []);
 
   const displayedStudents = students?.filter((student) => {
-    return student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase())
+    if (student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.first_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.major.toLowerCase().includes(searchItem?.toLowerCase())) {
+      return student
+    }
   })
-
 
   const renderStudents = displayedStudents?.map((s) => (
       <StudentListItem
