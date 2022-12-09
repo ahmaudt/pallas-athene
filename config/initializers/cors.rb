@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:4000', 'https://radiant-chamber-13554.herokuapp.com', "https://dev.timaeus.pro"
+    origins 'http://localhost:4000', 'https://radiant-chamber-13554.herokuapp.com', "http://dev.timaeus.pro"
 
     resource '*',
       headers: :any,
