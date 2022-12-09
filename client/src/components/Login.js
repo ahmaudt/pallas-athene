@@ -21,8 +21,7 @@ function Login({ onLogin }) {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data)
-            // onLogin(user)
+            onLogin(data)
         })
     }
 
