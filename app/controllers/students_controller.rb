@@ -1,16 +1,19 @@
 class StudentsController < ApplicationController
 
     def index
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         students = Student.all
         render json: students
     end
 
     def show
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         student = Student.find(params[:id])
         render json: student
     end
 
     def create
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         student = Student.create(student_params)
         student.user_id = @current_user.id
         student.save
@@ -18,12 +21,14 @@ class StudentsController < ApplicationController
     end
 
     def update
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         student = Student.find_by(id: params[:id])
         student.update(student_params)
         render json: student
     end
 
     def destroy
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         student = Student.find_by(id: params[:id])
         student.destroy
         head :no_content
