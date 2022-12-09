@@ -24,7 +24,7 @@ function ViewPlan() {
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/plans/${params.id}`)
+    fetch(`/plans/${params.id}`)
       .then((r) => r.json())
       .then((plan) => {
         setPlan(plan.data)

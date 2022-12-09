@@ -11,7 +11,7 @@ function StudentPlanList({  }) {
   const params = useParams();
 
   useEffect(() => {
-    fetch("/api/plans")
+    fetch("/plans")
       .then((r) => r.json())
       .then((data) => setPlans(data));
   }, []);
