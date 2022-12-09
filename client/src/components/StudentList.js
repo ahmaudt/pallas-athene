@@ -14,7 +14,7 @@ function StudentList({ searchItem, onSearchChange }) {
   }, []);
 
   const displayedStudents = students?.filter((student) => {
-    if (student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.first_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.major.toLowerCase().includes(searchItem?.toLowerCase())) {
+    if (student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.first_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.programs[0].major_code.toLowerCase().includes(searchItem?.toLowerCase())) {
       return student
     }
   })
