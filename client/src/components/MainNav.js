@@ -1,7 +1,6 @@
 import React from "react";
-import { NavDropdown, Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 
 function MainNav({ onLogout }) {
 
