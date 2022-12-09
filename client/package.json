@@ -2,7 +2,7 @@
   "name": "pallas-athena",
   "version": "0.1.0",
   "private": true,
-  "proxy": "../.env.REACT_APP_API_URL/",
+  "proxy": "http://localhost:3000",
   "engines": {
     "node": "16.x"
   },
