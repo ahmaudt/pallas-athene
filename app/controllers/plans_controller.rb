@@ -5,23 +5,27 @@ class PlansController < ApplicationController
     end
 
     def show
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         plan = Plan.find_by(id: params[:id])
         render json: plan
     end
 
     def create
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         plan = Plan.create(plan_params)
         plan.save
         render json: plan, status: :created
     end
 
     def update
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         plan = Plan.find_by(id: params[:id])
         plan.update(plan_params)
         render json: plan
     end
 
     def destroy
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         plan = Plan.find_by(id: params[:id])
         plan.destroy
     end
