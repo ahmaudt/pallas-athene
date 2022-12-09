@@ -42,6 +42,7 @@ function StudentList({ searchItem, onSearchChange }) {
         id={s.data.uga_my_id}
         student={s}
         studentId={s.id}
+        ugaId={s.data.uga_my_id}
       />
     ));
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-function StudentListItem({ studentId, firstName, lastName, major, minor }) {
+function StudentListItem({ ugaId, studentId, firstName, lastName, major, minor }) {
     // should pass in student_id as a prop down to the link
 
     return (
@@ -12,7 +12,7 @@ function StudentListItem({ studentId, firstName, lastName, major, minor }) {
                 <td>{firstName}</td>
                 <td>{major}</td>
                 <td>{minor}</td>
-                <td>{studentId}</td>
+                <td>{ugaId}</td>
                 <td>
                     <Link to={`/students/${studentId}`}>
                         <Button size='sm' className='rounded-0' variant='outline-primary'>
