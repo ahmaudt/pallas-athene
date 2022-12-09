@@ -16,7 +16,7 @@ class User < ApplicationRecord
         end
     end
 
-    def destroy
+    def destroy_session
         session.delete :user_id
         head :no_content
     end
