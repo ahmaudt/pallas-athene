@@ -60,7 +60,7 @@ function App() {
   }
 
   function handleLogout() {
-    fetch("/logout", { method: "DELETE" }).then(() => {
+    fetch("/api/v1/logout", { method: "DELETE" }).then(() => {
       setUser("");
       navigate("/login");
     });

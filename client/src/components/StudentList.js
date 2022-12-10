@@ -5,12 +5,15 @@ import StudentListItem from "./StudentListItem";
 import MainNav from "./MainNav";
 
 function StudentList({ searchItem, onSearchChange }) {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState(null);
 
   useEffect(() => {
     fetch("/api/v1/students")
       .then((r) => r.json())
-      .then((data) => setStudents(data));
+      .then((data) => {
+        setStudents(data)
+        console.log(data)
+      });
   }, []);
 
   const displayedStudents = students?.filter((student) => {
