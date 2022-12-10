@@ -4,13 +4,22 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import AcademicPlan from "./AcademicPlan";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-function StudentPlanList({ plans, onDeletePlan }) {
+function StudentPlanList({  }) {
+  const [plans, setPlans] = useState([]);
   const params = useParams();
+
+  useEffect(() => {
+    fetch("/api/v1/plans")
+      .then((r) => r.json())
+      .then((data) => setPlans(data));
+  }, []);
+
   const studentPlans = plans.filter((p) => p.student.id === parseInt(params.id));
 
   const planList = studentPlans.map((p) => {
-    return <AcademicPlan key={p.id} id={p.id} current_term={p.data.current_term} advising_term={p.data.advising_term} onDeletePlan={onDeletePlan} />
+    return <AcademicPlan key={p.id} id={p.id} current_term={p.data.current_term} advising_term={p.data.advising_term} />
   });
 
     return (

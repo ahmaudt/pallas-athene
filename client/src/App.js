@@ -1,11 +1,11 @@
 import React from "react";
+import fetch from 'isomorphic-fetch';
 import { useState, useEffect } from "react";
 import { Col } from "react-bootstrap";
 import {
   Routes,
   Route,
-  useNavigate,
-  useParams,
+  useNavigate
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -20,45 +20,25 @@ import MainNav from "./components/MainNav";
 
 function App() {
   const navigate = useNavigate();
-  // students is the state variable for the student list
-  const params = useParams();
-  const [students, setStudents] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [user, setUser] = useState({
     password: "",
     uga_my_id: ""
   });
   
-  const [plans, setPlans] = useState([]);
+  // const [plans, setPlans] = useState([]);
 
   useEffect(() => {
-    fetch("/user").then((r) => {
+    fetch("/api/v1/user").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
     });
   }, []);
 
-  useEffect(() => {
-    fetch("/students")
-      .then((r) => r.json())
-      .then((data) => setStudents(data));
-  }, []);
-
-  useEffect(() => {
-    fetch("/plans")
-      .then((r) => r.json())
-      .then((data) => setPlans(data));
-  }, []);
-
   const handleSelectStudent = (student) => {
     setSelectedStudent(student);
   };
-
-
-  const displayedStudents = students?.filter((student) => {
-    return student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase())
-  })
 
   function handleEditStudent(student) {
     setStudents(students.map((s) => (s.id === student.id ? student : s)));
@@ -80,7 +60,7 @@ function App() {
   }
 
   function handleLogout() {
-    fetch("/logout", { method: "DELETE" }).then(() => {
+    fetch("/api/v1/logout", { method: "DELETE" }).then(() => {
       setUser("");
       navigate("/login");
     });
@@ -102,7 +82,6 @@ function App() {
                   path="/students"
                   element={
                     <StudentList
-                      students={displayedStudents}
                       onSearchChange={setSearchItem}
                       searchItem={searchItem}
                     />
@@ -112,30 +91,27 @@ function App() {
                   exact
                   path="/students/:id"
                   element={
-                    <StudentDetail
-                      plans={plans}
-                      onEditStudent={handleEditStudent}
-                      onDeletePlan={handleDeletePlan}
-                    />
+                    <StudentDetail/>
                   }
                 />
                 <Route
                   exact
                   path="/plans/:id/edit"
-                  element={ <AcademicPlanForm onAddPlan={handleAddPlan} /> } />
+                  element={ <AcademicPlanForm  /> } />
                 <Route
+                  exact
                   path="/plans/:id/view"
                   element={<PrintPlan />}
                 />
                 <Route
                   exact
-                  path="/new-student"
-                  element={<NewStudentForm onAddStudent={handleAddStudent} />}
+                  path="/new_student"
+                  element={<NewStudentForm />}
                 />
                 <Route
                   exact
                   path="/students/:id/new_plan"
-                  element={<NewAcademicPlanForm onAddPlan={handleAddPlan} />}
+                  element={<NewAcademicPlanForm />}
                 />
                 <Route
                   exact
@@ -148,6 +124,7 @@ function App() {
                   element={<Login onLogin={handleLogin} />}
                 />
                 <Route
+                  exact
                   path="/logout"
                   element={<MainNav onLogout={handleLogout} />}
                 />

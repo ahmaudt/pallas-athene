@@ -1,13 +1,28 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Card, Col, FormControl, Row, Table } from "react-bootstrap";
-import CardHeader from "react-bootstrap/esm/CardHeader";
-import { useParams } from "react-router-dom";
 import StudentListItem from "./StudentListItem";
 import MainNav from "./MainNav";
 
-function StudentList({ students, searchItem, onSearchChange }) {
-  const renderStudents = students?.map((s) => (
+function StudentList({ searchItem, onSearchChange }) {
+  const [students, setStudents] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/v1/students")
+      .then((r) => r.json())
+      .then((data) => {
+        setStudents(data)
+        console.log(data)
+      });
+  }, []);
+
+  const displayedStudents = students?.filter((student) => {
+    if (student?.data?.last_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.first_name.toLowerCase().includes(searchItem?.toLowerCase()) || student?.data?.programs[0]?.program_code.toLowerCase().includes(searchItem?.toLowerCase())) {
+      return student
+    }
+  })
+
+  const renderStudents = displayedStudents?.map((s) => (
       <StudentListItem
         key={s.id}
         firstName={s.data.first_name}
@@ -29,7 +44,7 @@ function StudentList({ students, searchItem, onSearchChange }) {
         id={s.data.uga_my_id}
         student={s}
         studentId={s.id}
-        ugaMyId={s.data.uga_my_id}
+        ugaId={s.data.uga_my_id}
       />
     ));
 

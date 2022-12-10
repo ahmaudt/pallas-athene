@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function SignUp({ onSignUp }) {
+  const navigate = useNavigate();
   const [uga_my_id, setUgaMyId] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
@@ -12,7 +13,7 @@ function SignUp({ onSignUp }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/signup", {
+    fetch("/api/v1/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,6 +23,7 @@ function SignUp({ onSignUp }) {
       .then((r) => r.json())
       .then((user) => {
         onSignUp(user);
+        navigate('/students')
       });
   }
 

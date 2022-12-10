@@ -47,7 +47,7 @@ function AcademicPlanForm() {
 
 
   useEffect(() => {
-    fetch(`/plans/${params.id}`)
+    fetch(`/api/v1/plans/${params.id}`)
       .then((r) => r.json())
       .then((plan) => {
         setPlan(plan);

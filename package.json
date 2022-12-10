@@ -14,7 +14,10 @@
   "dependencies": {
     "@fortawesome/fontawesome-pro": "^6.2.0",
     "@fortawesome/pro-solid-svg-icons": "^6.2.0",
+    "@mars/heroku-js-runtime-env": "^3.0.2",
     "bootstrap": "^4.6.2",
+    "http-proxy-middleware": "^2.0.6",
+    "isomorphic-fetch": "^3.0.0",
     "react-bootstrap": "^2.6.0"
   }
 }

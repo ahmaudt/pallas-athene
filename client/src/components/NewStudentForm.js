@@ -7,7 +7,7 @@ import MainNav from "./MainNav";
 import { Link } from "react-router-dom";
 
 
-function NewStudentForm({ onAddStudent }) {
+function NewStudentForm() {
   const navigate = useNavigate();
   const [rowCount, setRowCount] = useState(2);
   const [studentData, setStudentData] = useState({
@@ -36,7 +36,7 @@ function NewStudentForm({ onAddStudent }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/students", {
+    fetch("/api/v1/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,10 +48,8 @@ function NewStudentForm({ onAddStudent }) {
       ),
     })
       .then((r) => r.json())
-      // below updates students in the state of App.js
-      .then((data) => {
-        onAddStudent(data);
-        navigate("/students");
+      .then((student) => {
+        navigate(`/students/${student.id}`)
       });
       
   }

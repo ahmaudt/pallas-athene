@@ -1,8 +1,9 @@
 class User < ApplicationRecord
     has_many :students
     has_many :plans, through: :students
-    has_secure_password
     validates :uga_my_id, presence: true, uniqueness: true
+    has_secure_password
+
     def show
         user = User.find_by(id: session[:user_id])
         if user
@@ -15,7 +16,7 @@ class User < ApplicationRecord
         end
     end
 
-    def destroy
+    def destroy_session
         session.delete :user_id
         head :no_content
     end
@@ -27,7 +28,7 @@ class User < ApplicationRecord
 
     def authenticate(password)
         salt = password_digest[0..28]
-        return nil unless BCrypt::Engine.hash_secret(password, salt) == self.password_digest
+        return nil unless BCrypt::Engine.hash_secret(password, salt) === self.password_digest
         self
     end
 
