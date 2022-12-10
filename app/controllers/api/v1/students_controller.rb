@@ -1,7 +1,8 @@
 class Api::V1::StudentsController < ApplicationController
 
     def index
-        students = Student.all
+        # students = Student.all
+        students = Student.find_by(user_id: @current_user.id)
         render json: students
     end
 
